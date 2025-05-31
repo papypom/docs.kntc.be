@@ -1,0 +1,4 @@
+baseURL = 'https://docs.kntc.be/'
+languageCode = 'fr-fr'
+title = 'Kinetic Docs'
+theme = 'hugo-book'

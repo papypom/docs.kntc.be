@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kinetic Docs</title><link>https://docs.kntc.be/</link><description>Recent content on Kinetic Docs</description><generator>Hugo</generator><language>fr-fr</language><lastBuildDate>Sat, 31 May 2025 23:02:56 +0200</lastBuildDate><atom:link href="https://docs.kntc.be/index.xml" rel="self" type="application/rss+xml"/><item><title>Publish Website</title><link>https://docs.kntc.be/docs/hugo/publish-website/</link><pubDate>Sat, 31 May 2025 23:02:56 +0200</pubDate><guid>https://docs.kntc.be/docs/hugo/publish-website/</guid><description>&lt;h2 id="how-to-publish-using-current-config">
+ How to publish using current config
+ &lt;a class="anchor" href="#how-to-publish-using-current-config">#&lt;/a>
+&lt;/h2>
+&lt;p>Rclone is set to have a remote called &amp;lsquo;docs.kntc.be&amp;rsquo; :&lt;/p>
+&lt;pre tabindex="0">&lt;code>hugo --gc --minify
+rclone sync --interactive public/ docs.kntc.be:
+&lt;/code>&lt;/pre></description></item></channel></rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Kinetic Docs</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on Kinetic Docs</description>
+    <generator>Hugo</generator>
+    <language>fr-fr</language>
+    <lastBuildDate>Sat, 31 May 2025 23:02:56 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Publish Website</title>
+      <link>http://localhost:1313/posts/publish-website/</link>
+      <pubDate>Sat, 31 May 2025 23:02:56 +0200</pubDate>
+      <guid>http://localhost:1313/posts/publish-website/</guid>
+      <description>&lt;h2 id=&#34;how-to-publish-using-current-config&#34;&gt;&#xA;  How to publish using current config&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#how-to-publish-using-current-config&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;Rclone is set to have a remote called &amp;lsquo;docs.kntc.be&amp;rsquo; :&lt;/p&gt;&#xA;&lt;p&gt;&amp;lsquo;&amp;lsquo;&amp;lsquo;hugo &amp;ndash;gc &amp;ndash;minify&#xA;rclone sync &amp;ndash;interactive public/ docs.kntc.be:&amp;rsquo;&amp;rsquo;&amp;rsquo;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
