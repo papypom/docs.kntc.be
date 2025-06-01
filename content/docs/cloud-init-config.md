@@ -36,7 +36,7 @@ packages:
   - fail2ban
   - python3-systemd
 package_update: true
-package upgrade: true
+package_upgrade: true
 write_files:
 - content: |
     [sshd]

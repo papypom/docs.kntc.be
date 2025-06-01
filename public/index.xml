@@ -8,7 +8,22 @@
  Minimal cloud-init config
  &lt;a class="anchor" href="#minimal-cloud-init-config">#&lt;/a>
 &lt;/h2>
-&lt;p>This minimal config files sets up a user, gives it &lt;code>sudo&lt;/code> privileges, sets up fail2ban and prevent SSH for root and without a SSH key.&lt;/p></description></item><item><title>Hacks</title><link>https://docs.kntc.be/docs/hacks/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.kntc.be/docs/hacks/</guid><description>&lt;h2 id="hacks">
+&lt;p>This minimal config files sets up a user, gives it &lt;code>sudo&lt;/code> privileges, sets up fail2ban and prevent SSH for root and without a SSH key.&lt;/p></description></item><item><title>Docker Server</title><link>https://docs.kntc.be/docs/docker-server/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.kntc.be/docs/docker-server/</guid><description>&lt;h2 id="docker-server">
+ Docker server
+ &lt;a class="anchor" href="#docker-server">#&lt;/a>
+&lt;/h2>
+&lt;p>This section covers the deployement of a standardized portainer instance, using Caddy as reverse proxy.&lt;/p>
+&lt;h2 id="launch-portainer">
+ Launch portainer
+ &lt;a class="anchor" href="#launch-portainer">#&lt;/a>
+&lt;/h2>
+&lt;p>Enter the following command :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>sudo docker run -d -p 9443:9443 --name portainer --restart=always \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data \
+&lt;/span>&lt;/span>&lt;span style="display:flex; background-color:#dfdfdf">&lt;span> --network=YOUR_NETWORK -l caddy=YOUR_DOMAIN \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -l &amp;#34;caddy.reverse_proxy={{upstreams 9000}}&amp;#34; \
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -l caddy.tls=internal portainer/portainer-ce:sts 
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Hacks</title><link>https://docs.kntc.be/docs/hacks/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.kntc.be/docs/hacks/</guid><description>&lt;h2 id="hacks">
  Hacks
  &lt;a class="anchor" href="#hacks">#&lt;/a>
 &lt;/h2>
@@ -17,7 +32,7 @@
  Set default path in rclone
  &lt;a class="anchor" href="#set-default-path-in-rclone">#&lt;/a>
 &lt;/h2>
-&lt;p>Usually, I set up &lt;a href="https://rclone.org/">rclone&lt;/a> to use SFTP. It works, but always ask for the path to destination folder, with no way to set a default path. So a way to go around this is to set an alias as such :&lt;/p></description></item><item><title>Hugo cheat sheet</title><link>https://docs.kntc.be/docs/hugo-cheat-sheet/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.kntc.be/docs/hugo-cheat-sheet/</guid><description>&lt;h2 id="create-new-page">
+&lt;p>Usually, I set up &lt;a href="https://rclone.org/">rclone&lt;/a> to use SFTP. It works, but always ask for the path to destination folder, with no way to set a default path. A solution is to add an alias to your config file (default path &lt;code>~/.config/rclone/rclone.conf&lt;/code>), as shown hereunder.&lt;/p></description></item><item><title>Hugo cheat sheet</title><link>https://docs.kntc.be/docs/hugo-cheat-sheet/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.kntc.be/docs/hugo-cheat-sheet/</guid><description>&lt;h2 id="create-new-page">
  Create new page
  &lt;a class="anchor" href="#create-new-page">#&lt;/a>
 &lt;/h2>
@@ -33,4 +48,12 @@
  Publish website
  &lt;a class="anchor" href="#publish-website">#&lt;/a>
 &lt;/h2>
-&lt;p>I&amp;rsquo;m using &lt;a href="https://rclone.org/">rclone&lt;/a>, which is set with a SFTP remote named &lt;code>docs.kntc.be&lt;/code>. Enter the following commands :&lt;/p></description></item></channel></rss>
+&lt;p>I&amp;rsquo;m using &lt;a href="https://rclone.org/">rclone&lt;/a>, which is set with a SFTP remote named &lt;code>docs.kntc.be&lt;/code>. Enter the following commands :&lt;/p></description></item><item><title>Links</title><link>https://docs.kntc.be/docs/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.kntc.be/docs/links/</guid><description>&lt;h2 id="useful-links">
+ Useful links
+ &lt;a class="anchor" href="#useful-links">#&lt;/a>
+&lt;/h2>
+&lt;p>This is an amalgamation of the websites I use regularly :&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://dnschecker.org/">DNS Checker&lt;/a> : Useful to check if the new subdomain you&amp;rsquo;ve just created/modified is live.&lt;/li>
+&lt;li>&lt;a href="https://www.ssllabs.com/ssltest/">Qualys SSL Checker&lt;/a> : Check the quality of your SSL deployment.&lt;/li>
+&lt;/ul></description></item></channel></rss>

@@ -38,6 +38,8 @@ rclone sync public/ docs.kntc.be:
 
 ## Syntax highlighting
 
-For specific code, such as YAML, I use [syntax highlighting](https://gohugo.io/content-management/syntax-highlighting/) and the [emacs style](https://gohugo.io/quick-reference/syntax-highlighting-styles/).
+For specific langages, such as YAML, I use [syntax highlighting](https://gohugo.io/content-management/syntax-highlighting/) and the [emacs style](https://gohugo.io/quick-reference/syntax-highlighting-styles/).
 
-Thus, for YAML the header is ` ```yml {style=emacs}`. To highligh specific lines, add `hl_lines=[2,"4-7"]` between the braces, and to add line numbering `linenos=inline`.
+Thus, for YAML the header is ` ```yml {style=emacs}`. To highligh specific lines, add `hl_lines=[2,"4-7"]` between the braces, and to add line numbering `linenos=inline`. 
+
+Here's the [list of supported langages](https://gohugo.io/content-management/syntax-highlighting/#languages) - note, for plaintext you can use either `text` or `ucode`.
