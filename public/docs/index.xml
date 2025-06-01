@@ -1,25 +1,27 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Docs on Kinetic Docs</title>
-    <link>http://localhost:1313/docs/</link>
-    <description>Recent content in Docs on Kinetic Docs</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <atom:link href="http://localhost:1313/docs/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>cloud-init config</title>
-      <link>http://localhost:1313/docs/cloud-init-config/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/cloud-init-config/</guid>
-      <description>&lt;h2 id=&#34;scope&#34;&gt;&#xA;  Scope&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#scope&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;This page list the various cloud-init config file I&amp;rsquo;m using when creating a new server. Unless specified, I&amp;rsquo;m working with a Debian Bookworm install, on an ARM CPU, using &lt;a href=&#34;https://www.hetzner.com/&#34;&gt;Hetzner&lt;/a&gt; as a cloud provider.&lt;/p&gt;&#xA;&lt;h2 id=&#34;minimal-cloud-init-config&#34;&gt;&#xA;  Minimal cloud-init config&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#minimal-cloud-init-config&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;This minimal config files sets up a user, gives it &lt;code&gt;sudo&lt;/code&gt; privileges, sets up fail2ban and prevent SSH for root and without a SSH key.&lt;/p&gt;&#xA;&lt;p&gt;Replace the content of the highlighted lines as specified.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Hugo cheat sheet</title>
-      <link>http://localhost:1313/docs/hugo-cheat-sheet/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/hugo-cheat-sheet/</guid>
-      <description>&lt;h2 id=&#34;create-new-page&#34;&gt;&#xA;  Create new page&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#create-new-page&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;m using the &lt;a href=&#34;https://github.com/alex-shpak/hugo-book&#34;&gt;Hugo Book&lt;/a&gt; Theme, which means it will render the content of the content in the &lt;code&gt;content/docs&lt;/code&gt; folder as a book.&lt;/p&gt;&#xA;&lt;p&gt;So the creation of a new page go as such :&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hugo new content content/docs/my-new-page.md&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;serve-locally&#34;&gt;&#xA;  Serve locally&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#serve-locally&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;Simply use &lt;code&gt;hugo serve --disableFastRender&lt;/code&gt;. The &lt;code&gt;disableFastRender&lt;/code&gt; option is there to ensure proper site construction, when you add page, for example.&lt;/p&gt;&#xA;&lt;h2 id=&#34;publish-website&#34;&gt;&#xA;  Publish website&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#publish-website&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;m using &lt;a href=&#34;https://rclone.org/&#34;&gt;rclone&lt;/a&gt;, which is set with a SFTP remote named &lt;code&gt;docs.kntc.be&lt;/code&gt;. Enter the following commands :&lt;/p&gt;</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docs on Kinetic Docs</title><link>https://docs.kntc.be/docs/</link><description>Recent content in Docs on Kinetic Docs</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://docs.kntc.be/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>cloud-init config</title><link>https://docs.kntc.be/docs/cloud-init-config/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.kntc.be/docs/cloud-init-config/</guid><description>&lt;h2 id="scope">
+ Scope
+ &lt;a class="anchor" href="#scope">#&lt;/a>
+&lt;/h2>
+&lt;p>This page list the various cloud-init config file I&amp;rsquo;m using when creating a new server. Unless specified, I&amp;rsquo;m working with a Debian Bookworm install, on an ARM CPU, using &lt;a href="https://www.hetzner.com/">Hetzner&lt;/a> as a cloud provider.&lt;/p>
+&lt;h2 id="minimal-cloud-init-config">
+ Minimal cloud-init config
+ &lt;a class="anchor" href="#minimal-cloud-init-config">#&lt;/a>
+&lt;/h2>
+&lt;p>This minimal config files sets up a user, gives it &lt;code>sudo&lt;/code> privileges, sets up fail2ban and prevent SSH for root and without a SSH key.&lt;/p>
+&lt;p>Replace the content of the highlighted lines as specified.&lt;/p></description></item><item><title>Hugo cheat sheet</title><link>https://docs.kntc.be/docs/hugo-cheat-sheet/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.kntc.be/docs/hugo-cheat-sheet/</guid><description>&lt;h2 id="create-new-page">
+ Create new page
+ &lt;a class="anchor" href="#create-new-page">#&lt;/a>
+&lt;/h2>
+&lt;p>I&amp;rsquo;m using the &lt;a href="https://github.com/alex-shpak/hugo-book">Hugo Book&lt;/a> Theme, which means it will render the content of the content in the &lt;code>content/docs&lt;/code> folder as a book.&lt;/p>
+&lt;p>So the creation of a new page go as such :&lt;/p>
+&lt;pre tabindex="0">&lt;code>hugo new content content/docs/my-new-page.md
+&lt;/code>&lt;/pre>&lt;h2 id="serve-locally">
+ Serve locally
+ &lt;a class="anchor" href="#serve-locally">#&lt;/a>
+&lt;/h2>
+&lt;p>Simply use &lt;code>hugo serve --disableFastRender&lt;/code>. The &lt;code>disableFastRender&lt;/code> option is there to ensure proper site construction, when you add page, for example.&lt;/p>
+&lt;h2 id="publish-website">
+ Publish website
+ &lt;a class="anchor" href="#publish-website">#&lt;/a>
+&lt;/h2>
+&lt;p>I&amp;rsquo;m using &lt;a href="https://rclone.org/">rclone&lt;/a>, which is set with a SFTP remote named &lt;code>docs.kntc.be&lt;/code>. Enter the following commands :&lt;/p></description></item></channel></rss>
