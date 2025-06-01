@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr-fr" dir="ltr">
+<html lang="en-us" dir="ltr">
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,31 +16,29 @@ hugo new content content/docs/my-new-page.md
 
 Simply use hugo serve --disableFastRender. The disableFastRender option is there to ensure proper site construction, when you add page, for example.
 
-  Publish on the net
+  Publish website
   #
 
-I&rsquo;m using rclone, which is set with a SFTP remote named docs.kntc.be :">
+I&rsquo;m using rclone, which is set with a SFTP remote named docs.kntc.be. Enter the following commands :">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/publish-website/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/hugo-cheat-sheet/">
   <meta property="og:site_name" content="Kinetic Docs">
   <meta property="og:title" content="Hugo cheat sheet">
   <meta property="og:description" content="Create new page # I’m using the Hugo Book Theme, which means it will render the content of the content in the content/docs folder as a book.
 So the creation of a new page go as such :
 hugo new content content/docs/my-new-page.md Serve locally # Simply use hugo serve --disableFastRender. The disableFastRender option is there to ensure proper site construction, when you add page, for example.
-Publish on the net # I’m using rclone, which is set with a SFTP remote named docs.kntc.be :">
-  <meta property="og:locale" content="fr_fr">
+Publish website # I’m using rclone, which is set with a SFTP remote named docs.kntc.be. Enter the following commands :">
+  <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-    <meta property="article:published_time" content="2025-05-31T23:02:56+02:00">
-    <meta property="article:modified_time" content="2025-05-31T23:02:56+02:00">
 <title>Hugo cheat sheet | Kinetic Docs</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="http://localhost:1313/docs/publish-website/">
+<link rel="canonical" href="http://localhost:1313/docs/hugo-cheat-sheet/">
 <link rel="stylesheet" href="/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.133060d8b99065ce499ea7e467855911c65afa0d7662931d5aa864595f74a009.js" integrity="sha256-EzBg2LmQZc5JnqfkZ4VZEcZa&#43;g12YpMdWqhkWV90oAk=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.652ba1260e0e904c8fa613e69443395ab68e6684a5d6daf04bddad4b6b8f6be3.js" integrity="sha256-ZSuhJg4OkEyPphPmlEM5WraOZoSl1trwS92tS2uPa&#43;M=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -86,6 +84,17 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     
       
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cloud-init-config/" class="">cloud-init config</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -94,7 +103,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/publish-website/" class="active">Hugo cheat sheet</a>
+    <a href="/docs/hugo-cheat-sheet/" class="active">Hugo cheat sheet</a>
   
 
         </li>
@@ -153,7 +162,8 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li><a href="#create-new-page">Create new page</a></li>
     <li><a href="#serve-locally">Serve locally</a></li>
-    <li><a href="#publish-on-the-net">Publish on the net</a></li>
+    <li><a href="#publish-website">Publish website</a></li>
+    <li><a href="#syntax-highlighting">Syntax highlighting</a></li>
   </ul>
 </nav>
 
@@ -178,14 +188,22 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#serve-locally">#</a>
 </h2>
 <p>Simply use <code>hugo serve --disableFastRender</code>. The <code>disableFastRender</code> option is there to ensure proper site construction, when you add page, for example.</p>
-<h2 id="publish-on-the-net">
-  Publish on the net
-  <a class="anchor" href="#publish-on-the-net">#</a>
+<h2 id="publish-website">
+  Publish website
+  <a class="anchor" href="#publish-website">#</a>
 </h2>
-<p>I&rsquo;m using <a href="https://rclone.org/">rclone</a>, which is set with a SFTP remote named <code>docs.kntc.be</code> :</p>
+<p>I&rsquo;m using <a href="https://rclone.org/">rclone</a>, which is set with a SFTP remote named <code>docs.kntc.be</code>. Enter the following commands :</p>
 <pre tabindex="0"><code>hugo --gc --minify
 rclone sync --interactive public/ docs.kntc.be:
-</code></pre></article>
+</code></pre><p>The <code>--interactive</code> can be omitted if you simply want to push to prod and erase everything already present. So, as I&rsquo;m copy-pasting these commands, this becomes :</p>
+<pre tabindex="0"><code>rclone sync public/ docs.kntc.be:
+</code></pre><h2 id="syntax-highlighting">
+  Syntax highlighting
+  <a class="anchor" href="#syntax-highlighting">#</a>
+</h2>
+<p>For specific code, such as YAML, I use <a href="https://gohugo.io/content-management/syntax-highlighting/">syntax highlighting</a> and the <a href="https://gohugo.io/quick-reference/syntax-highlighting-styles/">emacs style</a>.</p>
+<p>Thus, for YAML the header is <code> ```yml {style=emacs}</code>. To highligh specific lines, add <code>hl_lines=[2,&quot;4-7&quot;]</code> between the braces, and to add line numbering, <code>linenos=inline</code>.</p>
+</article>
  
       
 
@@ -228,7 +246,8 @@ rclone sync --interactive public/ docs.kntc.be:
   <ul>
     <li><a href="#create-new-page">Create new page</a></li>
     <li><a href="#serve-locally">Serve locally</a></li>
-    <li><a href="#publish-on-the-net">Publish on the net</a></li>
+    <li><a href="#publish-website">Publish website</a></li>
+    <li><a href="#syntax-highlighting">Syntax highlighting</a></li>
   </ul>
 </nav>
 
