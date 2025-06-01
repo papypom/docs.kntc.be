@@ -3,12 +3,21 @@
  &lt;a class="anchor" href="#scope">#&lt;/a>
 &lt;/h2>
 &lt;p>This page list the various cloud-init config file I&amp;rsquo;m using when creating a new server. Unless specified, I&amp;rsquo;m working with a Debian Bookworm install, on an ARM CPU, using &lt;a href="https://www.hetzner.com/">Hetzner&lt;/a> as a cloud provider.&lt;/p>
+&lt;p>You can also check &lt;a href="https://cloud-init.io/">cloud-init official site&lt;/a> and &lt;a href="https://cloudinit.readthedocs.io/en/latest/reference/examples.html">cloud config examples&lt;/a>.&lt;/p>
 &lt;h2 id="minimal-cloud-init-config">
  Minimal cloud-init config
  &lt;a class="anchor" href="#minimal-cloud-init-config">#&lt;/a>
 &lt;/h2>
-&lt;p>This minimal config files sets up a user, gives it &lt;code>sudo&lt;/code> privileges, sets up fail2ban and prevent SSH for root and without a SSH key.&lt;/p>
-&lt;p>Replace the content of the highlighted lines as specified.&lt;/p></description></item><item><title>Hugo cheat sheet</title><link>https://docs.kntc.be/docs/hugo-cheat-sheet/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.kntc.be/docs/hugo-cheat-sheet/</guid><description>&lt;h2 id="create-new-page">
+&lt;p>This minimal config files sets up a user, gives it &lt;code>sudo&lt;/code> privileges, sets up fail2ban and prevent SSH for root and without a SSH key.&lt;/p></description></item><item><title>Hacks</title><link>https://docs.kntc.be/docs/hacks/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.kntc.be/docs/hacks/</guid><description>&lt;h2 id="hacks">
+ Hacks
+ &lt;a class="anchor" href="#hacks">#&lt;/a>
+&lt;/h2>
+&lt;p>This sections covers a bit of everything, each time I had to go off the beaten track to do stuff.&lt;/p>
+&lt;h2 id="set-default-path-in-rclone">
+ Set default path in rclone
+ &lt;a class="anchor" href="#set-default-path-in-rclone">#&lt;/a>
+&lt;/h2>
+&lt;p>Usually, I set up &lt;a href="https://rclone.org/">rclone&lt;/a> to use SFTP. It works, but always ask for the path to destination folder, with no way to set a default path. So a way to go around this is to set an alias as such :&lt;/p></description></item><item><title>Hugo cheat sheet</title><link>https://docs.kntc.be/docs/hugo-cheat-sheet/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.kntc.be/docs/hugo-cheat-sheet/</guid><description>&lt;h2 id="create-new-page">
  Create new page
  &lt;a class="anchor" href="#create-new-page">#&lt;/a>
 &lt;/h2>

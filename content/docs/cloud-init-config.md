@@ -13,6 +13,8 @@ weight: 1
 
 This page list the various cloud-init config file I'm using when creating a new server. Unless specified, I'm working with a Debian Bookworm install, on an ARM CPU, using [Hetzner](https://www.hetzner.com/) as a cloud provider.
 
+You can also check [cloud-init official site](https://cloud-init.io/) and [cloud config examples](https://cloudinit.readthedocs.io/en/latest/reference/examples.html).
+
 ## Minimal cloud-init config
 
 This minimal config files sets up a user, gives it `sudo` privileges, sets up fail2ban and prevent SSH for root and without a SSH key.
