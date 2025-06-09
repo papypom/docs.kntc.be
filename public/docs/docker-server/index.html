@@ -2,25 +2,195 @@
   Docker server
   #
 
-This section covers the deployement of a standardized portainer instance, using Caddy as reverse proxy.
+This section covers the deployement of a standardized portainer instance, using Caddy as reverse proxy. The root system is the docker-enabled debian.
 
   Launch portainer
   #
 
-Enter the following command :
-sudo docker run -d -p 9443:9443 --name portainer --restart=always \
-    -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data \
-    --network=YOUR_NETWORK -l caddy=YOUR_DOMAIN \
-    -l "caddy.reverse_proxy={{upstreams 9000}}" \
-    -l caddy.tls=internal portainer/portainer-ce:sts 
-'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://docs.kntc.be/docs/docker-server/"><meta property="og:site_name" content="Kinetic Docs"><meta property="og:title" content="Docker Server"><meta property="og:description" content='Docker server # This section covers the deployement of a standardized portainer instance, using Caddy as reverse proxy.
-Launch portainer # Enter the following command :
-sudo docker run -d -p 9443:9443 --name portainer --restart=always \ -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data \ --network=YOUR_NETWORK -l caddy=YOUR_DOMAIN \ -l "caddy.reverse_proxy={{upstreams 9000}}" \ -l caddy.tls=internal portainer/portainer-ce:sts'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>Docker Server | Kinetic Docs</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://docs.kntc.be/docs/docker-server/><link rel=stylesheet href=/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.2970e07e1bc249d492c364aa761699e812b5762a01db526d032201baf6b04e42.js integrity="sha256-KXDgfhvCSdSSw2SqdhaZ6BK1dioB21JtAyIBuvawTkI=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>Kinetic Docs</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li><a href=/docs/cloud-init-config/>cloud-init config</a></li><li><a href=/docs/docker-server/ class=active>Docker Server</a></li><li><a href=/docs/hacks/>Hacks</a></li><li><a href=/docs/hugo-cheat-sheet/>Hugo cheat sheet</a></li><li><a href=/docs/links/>Links</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>Docker Server</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#docker-server>Docker server</a></li><li><a href=#launch-portainer>Launch portainer</a></li></ul></nav></aside></header><article class="markdown book-article"><h2 id=docker-server>Docker server
-<a class=anchor href=#docker-server>#</a></h2><p>This section covers the deployement of a standardized portainer instance, using Caddy as reverse proxy.</p><h2 id=launch-portainer>Launch portainer
-<a class=anchor href=#launch-portainer>#</a></h2><p>Enter the following command :</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid><code class=language-text data-lang=text><span style=display:flex><span>sudo docker run -d -p 9443:9443 --name portainer --restart=always \
-</span></span><span style=display:flex><span>    -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data \
-</span></span><span style=display:flex;background-color:#dfdfdf><span>    --network=YOUR_NETWORK -l caddy=YOUR_DOMAIN \
-</span></span><span style=display:flex><span>    -l &#34;caddy.reverse_proxy={{upstreams 9000}}&#34; \
-</span></span><span style=display:flex><span>    -l caddy.tls=internal portainer/portainer-ce:sts 
-</span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#docker-server>Docker server</a></li><li><a href=#launch-portainer>Launch portainer</a></li></ul></nav></div></aside></main></body></html>
+First create the network that will be used by caddy, here I&rsquo;m naming it caddy.
+ sudo docker network create caddy
+Create a folder called portainer, and within create the following compose.yml file. Modify as needed.
+services:
+  portainer:
+    image: portainer/portainer-ce:sts
+    ports:
+      - 9443:9443
+    volumes:
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    networks:
+      - caddy
+    labels:
+      caddy: portainer.example.com
+      caddy.reverse_proxy: "{{upstreams 9000}}"
+    
+networks:
+  caddy: #change the network name if needed.
+    external: true
+    
+volumes:
+  portainer_data: {}
+Then, from within the folder, a simple sudo docker compose up -d will spin up portainer on port 9443 (don&rsquo;t forget to append https://).'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://docs.kntc.be/docs/docker-server/"><meta property="og:site_name" content="Kinetic Docs"><meta property="og:title" content="Docker Server"><meta property="og:description" content='Docker server # This section covers the deployement of a standardized portainer instance, using Caddy as reverse proxy. The root system is the docker-enabled debian.
+Launch portainer # First create the network that will be used by caddy, here I’m naming it caddy.
+sudo docker network create caddy
+Create a folder called portainer, and within create the following compose.yml file. Modify as needed.
+services: portainer: image: portainer/portainer-ce:sts ports: - 9443:9443 volumes: - portainer_data:/data - /var/run/docker.sock:/var/run/docker.sock restart: unless-stopped networks: - caddy labels: caddy: portainer.example.com caddy.reverse_proxy: "{{upstreams 9000}}" networks: caddy: #change the network name if needed. external: true volumes: portainer_data: {} Then, from within the folder, a simple sudo docker compose up -d will spin up portainer on port 9443 (don’t forget to append https://).'><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>Docker Server | Kinetic Docs</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://docs.kntc.be/docs/docker-server/><link rel=stylesheet href=/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.1a9d8e26b116e66da94ef7251e41284fab55b365b39fe39c3c5020f1db1aa70a.js integrity="sha256-Gp2OJrEW5m2pTvclHkEoT6tVs2Wzn+OcPFAg8dsapwo=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>Kinetic Docs</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li><a href=/docs/cloud-init-config/>cloud-init config</a></li><li><a href=/docs/configuration.yml/>configuration.yml</a></li><li><a href=/docs/docker-server/ class=active>Docker Server</a></li><li><a href=/docs/hacks/>Hacks</a></li><li><a href=/docs/hugo-cheat-sheet/>Hugo cheat sheet</a></li><li><a href=/docs/links/>Links</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>Docker Server</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#docker-server>Docker server</a></li><li><a href=#launch-portainer>Launch portainer</a></li><li><a href=#setting-up-caddy>Setting up caddy</a></li><li><a href=#setting-up-authelia>Setting up Authelia</a><ul><li><a href=#preparing-the-needed-files>Preparing the needed files</a></li><li><a href=#docker-compose-for-authelia>Docker-compose for Authelia</a></li><li><a href=#setting-up-authentification-for-the-portainer-via-authelia>Setting up authentification for the portainer via Authelia</a></li></ul></li><li><a href=#setting-up-oidc-for-portainer>Setting up OIDC for Portainer</a></li></ul></nav></aside></header><article class="markdown book-article"><h2 id=docker-server>Docker server
+<a class=anchor href=#docker-server>#</a></h2><p>This section covers the deployement of a standardized portainer instance, using Caddy as reverse proxy. The root system is the <a href=/docs/cloud-init-config/#minimal-cloud-init-config-with-docker>docker-enabled debian</a>.</p><h2 id=launch-portainer>Launch portainer
+<a class=anchor href=#launch-portainer>#</a></h2><p>First create the network that will be used by caddy, here I&rsquo;m naming it caddy.</p><p><code>sudo docker network create caddy</code></p><p>Create a folder called <code>portainer</code>, and within create the following <code>compose.yml</code> file. Modify as needed.</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid><code class=language-yml data-lang=yml><span style=display:flex><span><span style=color:green;font-weight:700>services</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:green;font-weight:700>portainer</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>image</span>:<span style=color:#bbb> </span>portainer/portainer-ce:sts<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>ports</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- <span style=color:#666>9443</span>:<span style=color:#666>9443</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>volumes</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- portainer_data:/data<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- /var/run/docker.sock:/var/run/docker.sock<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>restart</span>:<span style=color:#bbb> </span>unless-stopped<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>networks</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- caddy<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>labels</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex;background-color:#dfdfdf><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>caddy</span>:<span style=color:#bbb> </span>portainer.example.com<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>caddy.reverse_proxy</span>:<span style=color:#bbb> </span><span style=color:#b44>&#34;{{upstreams 9000}}&#34;</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:green;font-weight:700>networks</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex;background-color:#dfdfdf><span><span style=color:#bbb>  </span><span style=color:green;font-weight:700>caddy</span>:<span style=color:#bbb> </span><span style=color:#080;font-style:italic>#change the network name if needed.</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>external</span>:<span style=color:#bbb> </span><span style=color:#a2f;font-weight:700>true</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:green;font-weight:700>volumes</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:green;font-weight:700>portainer_data</span>:<span style=color:#bbb> </span>{}<span style=color:#bbb>
+</span></span></span></code></pre></div><p>Then, from within the folder, a simple <code>sudo docker compose up -d</code> will spin up portainer on port 9443 (don&rsquo;t forget to append https://).</p><h2 id=setting-up-caddy>Setting up caddy
+<a class=anchor href=#setting-up-caddy>#</a></h2><p>Using <a href=https://github.com/lucaslorentz/caddy-docker-proxy>caddy-docker-proxy</a> which allows for the generation of the caddyfile on the fly by settings labels on the target docking machine (this is the reason behind the 2 -l in the portainer command).</p><p>Replace the content of the highlighted lines as specified.</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid><code class=language-yml data-lang=yml><span style=display:flex><span><span style=color:green;font-weight:700>services</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:green;font-weight:700>caddy</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>image</span>:<span style=color:#bbb> </span>lucaslorentz/caddy-docker-proxy:ci-alpine<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>ports</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- <span style=color:#666>80</span>:<span style=color:#666>80</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- <span style=color:#666>443</span>:<span style=color:#666>443</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>environment</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex;background-color:#dfdfdf><span><span style=color:#bbb>      </span>- CADDY_INGRESS_NETWORKS=caddy<span style=color:#bbb> </span><span style=color:#080;font-style:italic>#change the network name if needed.</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>networks</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- caddy<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>volumes</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- /var/run/docker.sock:/var/run/docker.sock<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- caddy_data:/data<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>restart</span>:<span style=color:#bbb> </span>unless-stopped<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>labels</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex;background-color:#dfdfdf><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>caddy.email</span>:<span style=color:#bbb> </span>EMAIL_ADDRESS_FOR_LETSENCRYPT<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:green;font-weight:700>networks</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex;background-color:#dfdfdf><span><span style=color:#bbb>  </span><span style=color:green;font-weight:700>caddy</span>:<span style=color:#bbb> </span><span style=color:#080;font-style:italic>#change the network name if needed.</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>external</span>:<span style=color:#bbb> </span><span style=color:#a2f;font-weight:700>true</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:green;font-weight:700>volumes</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:green;font-weight:700>caddy_data</span>:<span style=color:#bbb> </span>{}<span style=color:#bbb>
+</span></span></span></code></pre></div><p>Now you have access to portainer on HTTPS at the domain specified when created portainer. So far so good. Main issue is now you have a portainer accessible on the internet without MFA, which, in 2025, is a big no-no. So the few next steps will set up Authelia to provide said second factor.</p><h2 id=setting-up-authelia>Setting up Authelia
+<a class=anchor href=#setting-up-authelia>#</a></h2><h3 id=preparing-the-needed-files>Preparing the needed files
+<a class=anchor href=#preparing-the-needed-files>#</a></h3><p>You will need : an SMTP account to send email from.</p><p>We will create the following directory structure and use bind mounts instead of storing passwords in the configuration, as per <a href=https://www.authelia.com/configuration/methods/secrets/>Authelia&rsquo;s documentation</a>.</p><pre tabindex=0><code>.
+├── configuration.yml
+├── secrets
+│   ├── JWT_SECRET
+│   ├── REDIS_PASSWORD
+│   ├── SESSION_SECRET
+│   ├── SMTP_PASSWORD
+│   ├── STORAGE_ENCRYPTION_KEY
+│   └── STORAGE_PASSWORD
+└── users_database.yml
+</code></pre><p>I&rsquo;m using the folder <code>/opt/authelia/</code>, so first create the needed directories :</p><pre tabindex=0><code>sudo mkdir -p /opt/authelia/secrets/
+</code></pre><p>cd to the newly created folder, and create the needed secrets file :</p><pre tabindex=0><code>tr -dc A-Za-z0-9 &lt;/dev/urandom | head -c 80 | { cat; echo; } | sudo tee JWT_SECRET
+tr -dc A-Za-z0-9 &lt;/dev/urandom | head -c 80 | { cat; echo; } | sudo tee SESSION_SECRET
+tr -dc A-Za-z0-9 &lt;/dev/urandom | head -c 80 | { cat; echo; } | sudo tee STORAGE_PASSWORD
+tr -dc A-Za-z0-9 &lt;/dev/urandom | head -c 80 | { cat; echo; } | sudo tee STORAGE_ENCRYPTION_KEY
+tr -dc A-Za-z0-9 &lt;/dev/urandom | head -c 80 | { cat; echo; } | sudo tee REDIS_PASSWORD
+</code></pre><p>And add a final file with the SMTP password :</p><pre tabindex=0><code>sudo nano SMTP_PASSWORD
+</code></pre><p>Create the <code>users_database.yml</code> in the root folder, and copy-paste the following content, editing the highlighted lines :</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid><code class=language-yml data-lang=yml><span style=display:flex><span><span style=color:#080;font-style:italic># User file database https://www.authelia.com/reference/guides/passwords/#yaml-format</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#080;font-style:italic># Generate passwords https://www.authelia.com/reference/guides/passwords/#passwords</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:green;font-weight:700>users</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex;background-color:#dfdfdf><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>yourusername</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex;background-color:#dfdfdf><span><span style=color:#bbb>        </span><span style=color:green;font-weight:700>password</span>:<span style=color:#bbb> </span>hashed_password<span style=color:#bbb>
+</span></span></span><span style=display:flex;background-color:#dfdfdf><span><span style=color:#bbb>        </span><span style=color:green;font-weight:700>displayname</span>:<span style=color:#bbb> </span><span style=color:#b44>&#34;Your Displayname&#34;</span><span style=color:#bbb>
+</span></span></span><span style=display:flex;background-color:#dfdfdf><span><span style=color:#bbb>        </span><span style=color:green;font-weight:700>email</span>:<span style=color:#bbb> </span>name@example.com<span style=color:#bbb>
+</span></span></span></code></pre></div><p>To hash the password, use the command :</p><pre tabindex=0><code>sudo docker run --rm -it authelia/authelia:latest authelia crypto hash generate argon2
+</code></pre><p>Create the ´configuration.yml´ file and paste the <a href=/docs/configuration.yml>pre-created version</a>, editing the lines as specified.</p><p>Once all the file are created, time to set everything as write-only :</p><pre tabindex=0><code>sudo chown -R root:root /opt/authelia
+sudo chmod -R 600 /opt/authelia
+</code></pre><h3 id=docker-compose-for-authelia>Docker-compose for Authelia
+<a class=anchor href=#docker-compose-for-authelia>#</a></h3><p>Caddy should be already up and running, go to your DNS and set the A record for Authelia and create the following compose file. Two values should be edited, the domain on line 22, and the REDIS_PASSWORD on line 39</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid><code class=language-yml data-lang=yml><span style=display:flex><span><span style=color:green;font-weight:700>name</span>:<span style=color:#bbb> </span><span style=color:#b44>&#34;authelia&#34;</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:green;font-weight:700>services</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:green;font-weight:700>app</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>image</span>:<span style=color:#bbb> </span>authelia/authelia:latest<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>restart</span>:<span style=color:#bbb> </span>unless-stopped<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>depends_on</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- database<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- redis<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>volumes</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- /opt/authelia:/config<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>environment</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE</span>:<span style=color:#bbb> </span>/config/secrets/JWT_SECRET<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>AUTHELIA_SESSION_SECRET_FILE</span>:<span style=color:#bbb> </span>/config/secrets/SESSION_SECRET<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE</span>:<span style=color:#bbb> </span>/config/secrets/SMTP_PASSWORD<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE</span>:<span style=color:#bbb> </span>/config/secrets/STORAGE_ENCRYPTION_KEY<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>AUTHELIA_STORAGE_POSTGRES_PASSWORD_FILE</span>:<span style=color:#bbb> </span>/config/secrets/STORAGE_PASSWORD<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>AUTHELIA_SESSION_REDIS_PASSWORD_FILE</span>:<span style=color:#bbb> </span>/config/secrets/REDIS_PASSWORD<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>networks</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- caddy<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- authelia<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>labels</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex;background-color:#dfdfdf><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>caddy</span>:<span style=color:#bbb> </span>auth.example.com<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>caddy.reverse_proxy</span>:<span style=color:#bbb> </span><span style=color:#b44>&#34;{{upstreams 9091}}&#34;</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:green;font-weight:700>database</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>image</span>:<span style=color:#bbb> </span>postgres:15<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>restart</span>:<span style=color:#bbb> </span>unless-stopped<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>volumes</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- postgres:/var/lib/postgresql/data<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- /opt/authelia/secrets/STORAGE_PASSWORD:/STORAGE_PASSWORD<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>environment</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>POSTGRES_USER</span>:<span style=color:#bbb> </span><span style=color:#b44>&#34;authelia&#34;</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>POSTGRES_PASSWORD_FILE</span>:<span style=color:#bbb> </span><span style=color:#b44>&#34;/STORAGE_PASSWORD&#34;</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>networks</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- authelia<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:green;font-weight:700>redis</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>image</span>:<span style=color:#bbb> </span>redis:7<span style=color:#bbb>
+</span></span></span><span style=display:flex;background-color:#dfdfdf><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>command</span>:<span style=color:#bbb> </span><span style=color:#b44>&#34;redis-server --save 60 1 --loglevel warning --requirepass EDIT_WITH_THE_REDIS_PASSWORD_CONTENT&#34;</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>volumes</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- redis:/data<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>networks</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- authelia<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:green;font-weight:700>networks</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:green;font-weight:700>caddy</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>external</span>:<span style=color:#bbb> </span><span style=color:#a2f;font-weight:700>true</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:green;font-weight:700>authelia</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:green;font-weight:700>volumes</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:green;font-weight:700>postgres</span>:<span style=color:#bbb> </span>{}<span style=color:#bbb> 
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:green;font-weight:700>redis</span>:<span style=color:#bbb> </span>{}<span style=color:#bbb>
+</span></span></span></code></pre></div><p>Authelia should now be reachable via the password you&rsquo;ve previously hashed. Confirm this by navigating to the address you&rsquo;ve set up for Authelia. Once all is working, it is now time to &mldr;</p><h3 id=setting-up-authentification-for-the-portainer-via-authelia>Setting up authentification for the portainer via Authelia
+<a class=anchor href=#setting-up-authentification-for-the-portainer-via-authelia>#</a></h3><p>Add the needed labels to your docker compose file for portainer. We&rsquo;ve also removed the port 9443, which is not used anymore.</p><div class=highlight><pre tabindex=0 style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid><code class=language-yml data-lang=yml><span style=display:flex><span><span style=color:green;font-weight:700>services</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:green;font-weight:700>portainer</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>image</span>:<span style=color:#bbb> </span>portainer/portainer-ce:sts<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#080;font-style:italic>#    ports:</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#080;font-style:italic>#      - 9443:9443</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>volumes</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- portainer_data:/data<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- /var/run/docker.sock:/var/run/docker.sock<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>restart</span>:<span style=color:#bbb> </span>unless-stopped<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>networks</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span>- caddy<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>labels</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex;background-color:#dfdfdf><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>caddy</span>:<span style=color:#bbb> </span>portainer.example.com<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>caddy.reverse_proxy</span>:<span style=color:#bbb> </span><span style=color:#b44>&#34;{{upstreams 9000}}&#34;</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>caddy.forward_auth: app:9091 #Note </span>:<span style=color:#bbb> </span>if accessing an external authelia, put the URL here<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>caddy.forward_auth.uri</span>:<span style=color:#bbb> </span>/api/authz/forward-auth<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:green;font-weight:700>caddy.forward_auth.copy_headers</span>:<span style=color:#bbb> </span><span style=color:#b44>&#34;Remote-User Remote-Groups Remote-Name Remote-Email&#34;</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#080;font-style:italic># Uncomment this line if accessing an external Authelia. header_up is required here as we have Caddy in front of Authelia remotely and we need to let that Caddy know we want to talk to Authelia and not some other site.</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#080;font-style:italic>#      caddy.foward_auth.header_up: &#34;Host {upstream_hostport}&#34; </span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:green;font-weight:700>networks</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:green;font-weight:700>caddy</span>:<span style=color:#bbb> </span><span style=color:#080;font-style:italic>#change the network name if needed.</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:green;font-weight:700>external</span>:<span style=color:#bbb> </span><span style=color:#a2f;font-weight:700>true</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:green;font-weight:700>volumes</span>:<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:green;font-weight:700>portainer_data</span>:<span style=color:#bbb> </span>{}<span style=color:#bbb>
+</span></span></span></code></pre></div><p>If you want to limit to a subpath you can add it to the line <code>caddy.forward_auth: app:9091</code> as such <code>caddy.forward_auth: "\subpath app:9091"</code></p><h2 id=setting-up-oidc-for-portainer>Setting up OIDC for Portainer
+<a class=anchor href=#setting-up-oidc-for-portainer>#</a></h2><p>Of course, you now have to enter 2 passwords and 1 TOTP to access your portainer, which is, to say the least, tedious. Thus the next and final step is to set up Authelia as an OIDC provider, and allow the config to be digested by Portainer. This is a story for another day.</p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#docker-server>Docker server</a></li><li><a href=#launch-portainer>Launch portainer</a></li><li><a href=#setting-up-caddy>Setting up caddy</a></li><li><a href=#setting-up-authelia>Setting up Authelia</a><ul><li><a href=#preparing-the-needed-files>Preparing the needed files</a></li><li><a href=#docker-compose-for-authelia>Docker-compose for Authelia</a></li><li><a href=#setting-up-authentification-for-the-portainer-via-authelia>Setting up authentification for the portainer via Authelia</a></li></ul></li><li><a href=#setting-up-oidc-for-portainer>Setting up OIDC for Portainer</a></li></ul></nav></div></aside></main></body></html>
