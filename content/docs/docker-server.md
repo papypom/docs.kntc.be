@@ -164,12 +164,15 @@ services:
     volumes:
       - /opt/authelia:/config
     environment:
+      X_AUTHELIA_CONFIG_FILTERS: template
       AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE: /config/secrets/JWT_SECRET
       AUTHELIA_SESSION_SECRET_FILE: /config/secrets/SESSION_SECRET
       AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE: /config/secrets/SMTP_PASSWORD
       AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE: /config/secrets/STORAGE_ENCRYPTION_KEY
       AUTHELIA_STORAGE_POSTGRES_PASSWORD_FILE: /config/secrets/STORAGE_PASSWORD
       AUTHELIA_SESSION_REDIS_PASSWORD_FILE: /config/secrets/REDIS_PASSWORD
+# Only uncomment this line if you are using OIDC - if not, Authelia will not start
+#      AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET_FILE: /config/secrets/HMAC_SECRET
     networks:
       - caddy
       - authelia
@@ -246,4 +249,41 @@ If you want to limit to a subpath you can add it to the line `caddy.forward_auth
 
 ## Setting up OIDC for Portainer
 
-Of course, you now have to enter 2 passwords and 1 TOTP to access your portainer, which is, to say the least, tedious. Thus the next and final step is to set up Authelia as an OIDC provider, and allow the config to be digested by Portainer. This is a story for another day.
+Of course, you now have to enter 2 passwords and 1 TOTP to access your portainer, which is, to say the least, tedious. Thus the next and final step is to set up Authelia as an OIDC provider, and allow the config to be digested by Portainer.
+
+First an additional secret and a 2048 bits RSA key will be needed, so go back to the folder `/opt/authelia/secrets/` and create them :
+```
+tr -dc A-Za-z0-9 </dev/urandom | head -c 80 | { cat; echo; } | sudo tee HMAC_SECRET
+openssl genrsa -out oidc.pem 2048
+```
+
+A hashed password will also be needed, so choose a password, and hash it using the following command :
+
+```
+sudo docker run --rm -it authelia/authelia:latest authelia crypto hash generate pbkdf2
+```
+
+Now, you have to edit the monstruous `configuration.yml` file to add OIDC, [see instructions](/docs/configuration-oidc.yml).
+
+Once the secrets are created and the file modified, you can restart Authelia after uncommenting the `AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET_FILE` line in the compose file. 
+
+And finally, you have to configure Portainer, as such :
+
+- Visit Settings
+- Visit Authentication
+- Configure the following options:
+  - Authentication Method: OAuth
+  - Automatic User Provision: Enable if you want users to automatically be created in Portainer.
+  - Provider: Custom
+    - Client ID: portainer
+    - Client Secret: *THE UNHASHED PASSWORD*
+    - Authorization URL: https://auth.example.com/api/oidc/authorization
+    - Access Token URL: https://auth.example.com/api/oidc/token
+    - Resource URL: https://auth.example.com/api/oidc/userinfo
+    - Redirect URL: https://portainer.example.com
+    - Logout URL: https://auth.example.com
+    - User Identifier: preferred_username *NOTE : you have to write preferred_username, not write your username !!!*
+    - Scopes: openid profile groups email
+    - Auth Style: In Params
+
+If you haven't selected Automatic user provision, you have to create a user which matches your authelia username in order to login with Oauth. So if your user in Authelia is called MyUsername, you have to add a user MyUsername in portainer.

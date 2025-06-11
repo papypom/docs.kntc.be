@@ -1,5 +1,5 @@
 ---
-title: "configuration.yml"
+title: "configuration.yml (with OIDC)"
 weight: 1
 # bookFlatSection: false
 bookToc: false
@@ -9,7 +9,7 @@ bookToc: false
 # bookSearchExclude: false
 ---
 
-## Example configuration.yml for Authelia without OIDC
+## Example configuration.yml for Authelia with OIDC
 
 Lines to edit :
 - 186 : Add your domain name for the authenticator
@@ -18,8 +18,10 @@ Lines to edit :
 - 1193 : STMP server & port
 - 1199 : SMTP username
 - 1208 : Sender name
+- 1386 : Hashed secret created previously
+- 1397 : Portainer domain
 
-Pro tip : you can jump to a specific line by opening a file with `nano` by using `nano +linenbr filename`.
+Pro tip : you can jump to a specific line by opening a file with `nano` by using `nano +linenbr filename`. Also, to see the line number as you edit, you can do `nano -c`.
 
 
 ```yml {style=emacs}
@@ -1287,21 +1289,21 @@ notifier:
 ##
 ## Identity Providers
 ##
-# identity_providers:
+identity_providers:
 
   ##
   ## OpenID Connect (Identity Provider)
   ##
   ## It's recommended you read the documentation before configuration of this section.
   ## See: https://www.authelia.com/c/oidc/provider
-  # oidc:
+  oidc:
     ## The hmac_secret is used to sign OAuth2 tokens (authorization code, access tokens and refresh tokens).
     ## HMAC Secret can also be set using a secret: https://www.authelia.com/c/secrets
     # hmac_secret: 'this_is_a_secret_abc123abc123abc'
 
     ## The JWK's issuer option configures multiple JSON Web Keys. It's required that at least one of the JWK's
     ## configured has the RS256 algorithm. For RSA keys (RS or PS) the minimum is a 2048 bit key.
-    # jwks:
+    jwks:
     # -
       ## Key ID embedded into the JWT header for key matching. Must be an alphanumeric string with 7 or less characters.
       ## This value is automatically generated if not provided. It's recommended to not configure this.
@@ -1314,7 +1316,7 @@ notifier:
       # use: 'sig'
 
       ## Required Private Key in PEM DER form.
-      # key: |
+      - key: {{ secret "/config/secrets/oidc.pem" | mindent 10 "|" | msquote }}
         # -----BEGIN PRIVATE KEY-----
         # ...
         # -----END PRIVATE KEY-----
@@ -1397,29 +1399,29 @@ notifier:
     ## Clients is a list of registered clients and their configuration.
     ## It's recommended you read the documentation before configuration of a registered client.
     ## See: https://www.authelia.com/c/oidc/registered-clients
-    # clients:
-      # -
+    clients:
+      -
         ## The Client ID is the OAuth 2.0 and OpenID Connect 1.0 Client ID which is used to link an application to a
         ## configuration.
-        # client_id: 'myapp'
+        client_id: 'portainer'
 
         ## The description to show to users when they end up on the consent screen. Defaults to the ID above.
-        # client_name: 'My Application'
+        client_name: 'Portainer'
 
         ## The client secret is a shared secret between Authelia and the consumer of this client.
         # yamllint disable-line rule:line-length
-        # client_secret: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng'  # The digest of 'insecure_secret'.
+        client_secret: '$pbkdf2-sha512$310000$c8p78n7pUMln0jzvd4aK4Q$JNRBzwAo0ek5qKn50cFzzvE9RXV88h1wJn5KGiHrD0YKtZaR/nCb2CJPOsKaPK0hjf.9yHxzQGZziziccp6Yng'  # The digest of 'insecure_secret'.
 
         ## Sector Identifiers are occasionally used to generate pairwise subject identifiers. In most cases this is not
         ## necessary. It is critical to read the documentation for more information.
         # sector_identifier_uri: 'https://example.com/sector.json'
 
         ## Sets the client to public. This should typically not be set, please see the documentation for usage.
-        # public: false
+        public: false
 
         ## Redirect URI's specifies a list of valid case-sensitive callbacks for this client.
-        # redirect_uris:
-          # - 'https://oidc.example.com:8080/oauth2/callback'
+        redirect_uris:
+          - 'https://portainer.example.com'
 
         ## Request URI's specifies a list of valid case-sensitive TLS-secured URIs for this client for use as
         ## URIs to fetch Request Objects.
@@ -1430,11 +1432,11 @@ notifier:
         # audience: []
 
         ## Scopes this client is allowed to request.
-        # scopes:
-          # - 'openid'
-          # - 'groups'
-          # - 'email'
-          # - 'profile'
+        scopes:
+          - 'openid'
+          - 'groups'
+          - 'email'
+          - 'profile'
 
         ## Grant Types configures which grants this client can obtain.
         ## It's not recommended to define this unless you know what you're doing.
@@ -1464,7 +1466,7 @@ notifier:
 
         ## This value controls the duration a consent on this client remains remembered when the consent mode is
         ## configured as 'auto' or 'pre-configured' in the duration common syntax.
-        # pre_configured_consent_duration: '1 week'
+        pre_configured_consent_duration: '1 month'
 
         ## Requires the use of Pushed Authorization Requests for this client when set to true.
         # require_pushed_authorization_requests: false
@@ -1618,7 +1620,7 @@ notifier:
         ## The permitted client authentication method for the Token Endpoint for this client.
         ## For confidential client types this value defaults to 'client_secret_basic' and for the public client types it
         ## defaults to 'none' per the specifications.
-        # token_endpoint_auth_method: 'client_secret_basic'
+        token_endpoint_auth_method: 'client_secret_post'
 
         ## The permitted client authentication signing algorithm for the Token Endpoint for this client when using
         ## the 'client_secret_jwt' or 'private_key_jwt' token_endpoint_auth_method.

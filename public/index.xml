@@ -8,9 +8,9 @@
  Minimal cloud-init config
  &lt;a class="anchor" href="#minimal-cloud-init-config">#&lt;/a>
 &lt;/h2>
-&lt;p>This minimal config files sets up a user, gives it &lt;code>sudo&lt;/code> privileges, sets up fail2ban and prevent SSH for root and without a SSH key.&lt;/p></description></item><item><title>configuration.yml</title><link>https://docs.kntc.be/docs/configuration.yml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.kntc.be/docs/configuration.yml/</guid><description>&lt;h2 id="example-configurationyml-for-authelia">
- Example configuration.yml for Authelia
- &lt;a class="anchor" href="#example-configurationyml-for-authelia">#&lt;/a>
+&lt;p>This minimal config files sets up a user, gives it &lt;code>sudo&lt;/code> privileges, sets up fail2ban and prevent SSH for root and without a SSH key.&lt;/p></description></item><item><title>configuration.yml</title><link>https://docs.kntc.be/docs/configuration.yml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.kntc.be/docs/configuration.yml/</guid><description>&lt;h2 id="example-configurationyml-for-authelia-without-oidc">
+ Example configuration.yml for Authelia without OIDC
+ &lt;a class="anchor" href="#example-configurationyml-for-authelia-without-oidc">#&lt;/a>
 &lt;/h2>
 &lt;p>Lines to edit :&lt;/p>
 &lt;ul>
@@ -1685,7 +1685,22 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-style:italic"># ...&lt;/span>&lt;span style="color:#bbb">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-style:italic"># -----END CERTIFICATE-----&lt;/span>&lt;span style="color:#bbb">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#00f;font-weight:bold">...&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker Server</title><link>https://docs.kntc.be/docs/docker-server/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.kntc.be/docs/docker-server/</guid><description>&lt;h2 id="docker-server">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>configuration.yml (with OIDC)</title><link>https://docs.kntc.be/docs/configuration-oidc.yml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.kntc.be/docs/configuration-oidc.yml/</guid><description>&lt;h2 id="example-configurationyml-for-authelia-with-oidc">
+ Example configuration.yml for Authelia with OIDC
+ &lt;a class="anchor" href="#example-configurationyml-for-authelia-with-oidc">#&lt;/a>
+&lt;/h2>
+&lt;p>Lines to edit :&lt;/p>
+&lt;ul>
+&lt;li>186 : Add your domain name for the authenticator&lt;/li>
+&lt;li>818 : Add the domain to protect&lt;/li>
+&lt;li>826 : Authelia domain&lt;/li>
+&lt;li>1193 : STMP server &amp;amp; port&lt;/li>
+&lt;li>1199 : SMTP username&lt;/li>
+&lt;li>1208 : Sender name&lt;/li>
+&lt;li>1386 : Hashed secret created previously&lt;/li>
+&lt;li>1397 : Portainer domain&lt;/li>
+&lt;/ul>
+&lt;p>Pro tip : you can jump to a specific line by opening a file with &lt;code>nano&lt;/code> by using &lt;code>nano +linenbr filename&lt;/code>. Also, to see the line number as you edit, you can do &lt;code>nano -c&lt;/code>.&lt;/p></description></item><item><title>Docker Server</title><link>https://docs.kntc.be/docs/docker-server/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://docs.kntc.be/docs/docker-server/</guid><description>&lt;h2 id="docker-server">
  Docker server
  &lt;a class="anchor" href="#docker-server">#&lt;/a>
 &lt;/h2>
