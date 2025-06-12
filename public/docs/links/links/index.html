@@ -4,47 +4,33 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Tips
+  Useful links
   #
 
-This sections covers things I don&rsquo;t do often, but I&rsquo;m happy to know they exist.
+This is an amalgamation of the websites I use regularly :
 
-  Set default path in rclone
-  #
 
-Usually, I set up 
-  rclone to use SFTP. It works, but always ask for the path to destination folder, with no way to set a default path. A solution is to add an alias to your config file (default path ~/.config/rclone/rclone.conf), as shown hereunder.
-[rclone_sftp]
-type = sftp
-host = docs.kntc.be
-user = YOUR_SSH_USER
-pass = HASHED_SSH_PASSWORD
-shell_type = unix
-md5sum_command = md5sum
-sha1sum_command = sha1sum
+  DNS Checker : Useful to check if the new subdomain you&rsquo;ve just created/modified is live.
 
-[docs.kntc.be]
-type = alias
-remote = rclone_sftp:DEFAULT/PATH/
-Don&rsquo;t forget to edit the highlighted lines.">
+  Qualys SSL Checker : Check the quality of your SSL deployment.
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/hacks/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/links/links/">
   <meta property="og:site_name" content="KNTC Docs">
-  <meta property="og:title" content="Tips">
-  <meta property="og:description" content="Tips # This sections covers things I don’t do often, but I’m happy to know they exist.
-Set default path in rclone # Usually, I set up rclone to use SFTP. It works, but always ask for the path to destination folder, with no way to set a default path. A solution is to add an alias to your config file (default path ~/.config/rclone/rclone.conf), as shown hereunder.
-[rclone_sftp] type = sftp host = docs.kntc.be user = YOUR_SSH_USER pass = HASHED_SSH_PASSWORD shell_type = unix md5sum_command = md5sum sha1sum_command = sha1sum [docs.kntc.be] type = alias remote = rclone_sftp:DEFAULT/PATH/ Don’t forget to edit the highlighted lines.">
+  <meta property="og:title" content="Links">
+  <meta property="og:description" content="Useful links # This is an amalgamation of the websites I use regularly :
+DNS Checker : Useful to check if the new subdomain you’ve just created/modified is live. Qualys SSL Checker : Check the quality of your SSL deployment.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-<title>Tips | KNTC Docs</title>
+<title>Links | KNTC Docs</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="http://localhost:1313/docs/hacks/">
+<link rel="canonical" href="http://localhost:1313/docs/links/links/">
 <link rel="stylesheet" href="/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.53c104bd53edd1c3232ea26c8be101aa57b0605c5c03b734da9c5e088c2a3313.js" integrity="sha256-U8EEvVPt0cMjLqJsi&#43;EBqlewYFxcA7c02pxeCIwqMxM=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.be04cd7c5b0d09ee1b49869439d1271ae23618ef6f3b164f433658bca9a3de54.js" integrity="sha256-vgTNfFsNCe4bSYaUOdEnGuI2GO9vOxZPQzZYvKmj3lQ=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -160,7 +146,25 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hugo-cheat-sheet/" class="">Hugo cheat sheet</a>
+    <a href="/docs/hugo/" class="">Hugo cheat sheet</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/links/links/" class="active">Links</a>
   
 
         </li>
@@ -173,21 +177,13 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/links/" class="">Links</a>
+    <a href="/docs/tips/" class="">Tips</a>
   
 
-        </li>
-      
-    
-      
-        <li>
           
-  
-  
-
-  
-    <a href="/docs/hacks/" class="active">Tips</a>
-  
+  <ul>
+    
+  </ul>
 
         </li>
       
@@ -227,7 +223,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Tips</h3>
+  <h3>Links</h3>
 
   <label for="toc-control">
     
@@ -243,10 +239,9 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#tips">Tips</a>
+    <li>
       <ul>
-        <li><a href="#set-default-path-in-rclone">Set default path in rclone</a></li>
-        <li><a href="#nano">Nano</a></li>
+        <li><a href="#useful-links">Useful links</a></li>
       </ul>
     </li>
   </ul>
@@ -261,35 +256,17 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="tips">
-  Tips
-  <a class="anchor" href="#tips">#</a>
-</h1>
-<p>This sections covers things I don&rsquo;t do often, but I&rsquo;m happy to know they exist.</p>
-<h2 id="set-default-path-in-rclone">
-  Set default path in rclone
-  <a class="anchor" href="#set-default-path-in-rclone">#</a>
+  <article class="markdown book-article"><h2 id="useful-links">
+  Useful links
+  <a class="anchor" href="#useful-links">#</a>
 </h2>
-<p>Usually, I set up 
-  <a href="https://rclone.org/">rclone</a> to use SFTP. It works, but always ask for the path to destination folder, with no way to set a default path. A solution is to add an alias to your config file (default path <code>~/.config/rclone/rclone.conf</code>), as shown hereunder.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>[rclone_sftp]
-</span></span><span style="display:flex;"><span>type = sftp
-</span></span><span style="display:flex;"><span>host = docs.kntc.be
-</span></span><span style="display:flex; background-color:#dfdfdf"><span>user = YOUR_SSH_USER
-</span></span><span style="display:flex; background-color:#dfdfdf"><span>pass = HASHED_SSH_PASSWORD
-</span></span><span style="display:flex;"><span>shell_type = unix
-</span></span><span style="display:flex;"><span>md5sum_command = md5sum
-</span></span><span style="display:flex;"><span>sha1sum_command = sha1sum
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>[docs.kntc.be]
-</span></span><span style="display:flex;"><span>type = alias
-</span></span><span style="display:flex; background-color:#dfdfdf"><span>remote = rclone_sftp:DEFAULT/PATH/
-</span></span></code></pre></div><p>Don&rsquo;t forget to edit the highlighted lines.</p>
-<h2 id="nano">
-  Nano
-  <a class="anchor" href="#nano">#</a>
-</h2>
-<p>I use nano as a text editor. Sue me. When editing, if you want to keep the line/character number on screen, add the <code>-c</code> flag, and you can open a file at a given line with the <code>+line_nbr</code> flag. To open the file bob.yml at the line 100, with line numbering activated, the command would be <code>nano -c +100 bob.yml</code>.</p>
+<p>This is an amalgamation of the websites I use regularly :</p>
+<ul>
+<li>
+  <a href="https://dnschecker.org/">DNS Checker</a> : Useful to check if the new subdomain you&rsquo;ve just created/modified is live.</li>
+<li>
+  <a href="https://www.ssllabs.com/ssltest/">Qualys SSL Checker</a> : Check the quality of your SSL deployment.</li>
+</ul>
 </article>
  
       
@@ -331,10 +308,9 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#tips">Tips</a>
+    <li>
       <ul>
-        <li><a href="#set-default-path-in-rclone">Set default path in rclone</a></li>
-        <li><a href="#nano">Nano</a></li>
+        <li><a href="#useful-links">Useful links</a></li>
       </ul>
     </li>
   </ul>

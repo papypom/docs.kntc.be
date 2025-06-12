@@ -1,50 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-	<meta name="generator" content="Hugo 0.147.7"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  What it this website ?
+  Create new page
   #
 
-Basically, it&rsquo;s the documentation of my homelab (which is mostly cloud-based, using 
-  Hetzner because I&rsquo;m cheap and it works and it&rsquo;s EU-based).
+I&rsquo;m using the 
+  Hugo Book Theme, which means it will render the content of the content in the content/docs folder as a book.
+So the creation of a new page go as such :
+hugo new content content/docs/my-new-page.md
 
-  How does this works ?
+  Serve locally
   #
 
-This website is created with 
-  Hugo, using the 
-  Hugo Book theme. The code for this site is available on 
-  Github. It&rsquo;s hosted on a Debian VPS, which runs 
-  CloudPanel. 
-  Rclone is used to publish the site.
+Simply use hugo serve --disableFastRender. The disableFastRender option is there to ensure proper site construction, when you add page, for example.
 
-  What is covered ?
+  Publish website
   #
 
-A bit of everything, the idea is to have a place where I can quickly copy-paste and remember what I did. Some stuff is still missing, including NextCloud setup, SeaweedFS experiments, Rclone setups, Cloudpanel, Debian, Postfix &hellip; Expect updates.">
+I&rsquo;m using 
+  rclone, which is set with a SFTP remote named docs.kntc.be. Enter the following commands :">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/hugo/">
   <meta property="og:site_name" content="KNTC Docs">
-  <meta property="og:title" content="Introduction">
-  <meta property="og:description" content="What it this website ? # Basically, it’s the documentation of my homelab (which is mostly cloud-based, using Hetzner because I’m cheap and it works and it’s EU-based).
-How does this works ? # This website is created with Hugo, using the Hugo Book theme. The code for this site is available on Github. It’s hosted on a Debian VPS, which runs CloudPanel. Rclone is used to publish the site.
-What is covered ? # A bit of everything, the idea is to have a place where I can quickly copy-paste and remember what I did. Some stuff is still missing, including NextCloud setup, SeaweedFS experiments, Rclone setups, Cloudpanel, Debian, Postfix … Expect updates.">
+  <meta property="og:title" content="Hugo cheat sheet">
+  <meta property="og:description" content="Create new page # I’m using the Hugo Book Theme, which means it will render the content of the content in the content/docs folder as a book.
+So the creation of a new page go as such :
+hugo new content content/docs/my-new-page.md Serve locally # Simply use hugo serve --disableFastRender. The disableFastRender option is there to ensure proper site construction, when you add page, for example.
+Publish website # I’m using rclone, which is set with a SFTP remote named docs.kntc.be. Enter the following commands :">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="website">
-<title>Introduction | KNTC Docs</title>
+<title>Hugo cheat sheet | KNTC Docs</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="http://localhost:1313/">
+<link rel="canonical" href="http://localhost:1313/docs/hugo/">
 <link rel="stylesheet" href="/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
   <script defer src="/en.search.min.be04cd7c5b0d09ee1b49869439d1271ae23618ef6f3b164f433658bca9a3de54.js" integrity="sha256-vgTNfFsNCe4bSYaUOdEnGuI2GO9vOxZPQzZYvKmj3lQ=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
-<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/index.xml" title="KNTC Docs" />
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/docs/hugo/index.xml" title="KNTC Docs" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -158,7 +156,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hugo/" class="">Hugo cheat sheet</a>
+    <a href="/docs/hugo/" class="active">Hugo cheat sheet</a>
   
 
           
@@ -240,7 +238,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Introduction</h3>
+  <h3>Hugo cheat sheet</h3>
 
   <label for="toc-control">
     
@@ -256,10 +254,14 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#what-it-this-website-">What it this website ?</a></li>
-    <li><a href="#how-does-this-works-">How does this works ?</a></li>
-    <li><a href="#what-is-covered-">What is covered ?</a></li>
-    <li><a href="#what-do-i-need-to-use-the-information-here-">What do I need to use the information here ?</a></li>
+    <li>
+      <ul>
+        <li><a href="#create-new-page">Create new page</a></li>
+        <li><a href="#serve-locally">Serve locally</a></li>
+        <li><a href="#publish-website">Publish website</a></li>
+        <li><a href="#syntax-highlighting">Syntax highlighting</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -272,32 +274,39 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h1 id="what-it-this-website-">
-  What it this website ?
-  <a class="anchor" href="#what-it-this-website-">#</a>
-</h1>
-<p>Basically, it&rsquo;s the documentation of my homelab (which is mostly cloud-based, using 
-  <a href="https://www.hetzner.com">Hetzner</a> because I&rsquo;m cheap and it works and it&rsquo;s EU-based).</p>
-<h1 id="how-does-this-works-">
-  How does this works ?
-  <a class="anchor" href="#how-does-this-works-">#</a>
-</h1>
-<p>This website is created with 
-  <a href="https://gohugo.io/">Hugo</a>, using the 
-  <a href="https://themes.gohugo.io/themes/hugo-book/">Hugo Book</a> theme. The code for this site is available on 
-  <a href="https://github.com/papypom/docs.kntc.be">Github</a>. It&rsquo;s hosted on a Debian VPS, which runs 
-  <a href="https://www.cloudpanel.io/">CloudPanel</a>. 
-  <a href="https://rclone.org/">Rclone</a> is used to publish the site.</p>
-<h1 id="what-is-covered-">
-  What is covered ?
-  <a class="anchor" href="#what-is-covered-">#</a>
-</h1>
-<p>A bit of everything, the idea is to have a place where I can quickly copy-paste and remember what I did. Some stuff is still missing, including NextCloud setup, SeaweedFS experiments, Rclone setups, Cloudpanel, Debian, Postfix &hellip; Expect updates.</p>
-<h1 id="what-do-i-need-to-use-the-information-here-">
-  What do I need to use the information here ?
-  <a class="anchor" href="#what-do-i-need-to-use-the-information-here-">#</a>
-</h1>
-<p>A working knowledge of Debian, some docker &amp; docker compose understanding, basic networking, the ability to edit DNS records.</p>
+  <article class="markdown book-article"><h2 id="create-new-page">
+  Create new page
+  <a class="anchor" href="#create-new-page">#</a>
+</h2>
+<p>I&rsquo;m using the 
+  <a href="https://github.com/alex-shpak/hugo-book">Hugo Book</a> Theme, which means it will render the content of the content in the <code>content/docs</code> folder as a book.</p>
+<p>So the creation of a new page go as such :</p>
+<pre tabindex="0"><code>hugo new content content/docs/my-new-page.md
+</code></pre><h2 id="serve-locally">
+  Serve locally
+  <a class="anchor" href="#serve-locally">#</a>
+</h2>
+<p>Simply use <code>hugo serve --disableFastRender</code>. The <code>disableFastRender</code> option is there to ensure proper site construction, when you add page, for example.</p>
+<h2 id="publish-website">
+  Publish website
+  <a class="anchor" href="#publish-website">#</a>
+</h2>
+<p>I&rsquo;m using 
+  <a href="https://rclone.org/">rclone</a>, which is set with a SFTP remote named <code>docs.kntc.be</code>. Enter the following commands :</p>
+<pre tabindex="0"><code>hugo --gc --minify
+rclone sync --interactive public/ docs.kntc.be:
+</code></pre><p>The <code>--interactive</code> can be omitted if you simply want to push to prod and erase everything already present. So, as I&rsquo;m copy-pasting these commands, this becomes :</p>
+<pre tabindex="0"><code>rclone sync public/ docs.kntc.be:
+</code></pre><h2 id="syntax-highlighting">
+  Syntax highlighting
+  <a class="anchor" href="#syntax-highlighting">#</a>
+</h2>
+<p>For specific langages, such as YAML, I use 
+  <a href="https://gohugo.io/content-management/syntax-highlighting/">syntax highlighting</a> and the 
+  <a href="https://gohugo.io/quick-reference/syntax-highlighting-styles/">emacs style</a>.</p>
+<p>Thus, for YAML the header is <code> ```yml {style=emacs}</code>. To highligh specific lines, add <code>hl_lines=[2,&quot;4-7&quot;]</code> between the braces, and to add line numbering <code>linenos=inline</code>.</p>
+<p>Here&rsquo;s the 
+  <a href="https://gohugo.io/content-management/syntax-highlighting/#languages">list of supported langages</a> - note, for plaintext you can use either <code>text</code> or <code>ucode</code>.</p>
 </article>
  
       
@@ -339,10 +348,14 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#what-it-this-website-">What it this website ?</a></li>
-    <li><a href="#how-does-this-works-">How does this works ?</a></li>
-    <li><a href="#what-is-covered-">What is covered ?</a></li>
-    <li><a href="#what-do-i-need-to-use-the-information-here-">What do I need to use the information here ?</a></li>
+    <li>
+      <ul>
+        <li><a href="#create-new-page">Create new page</a></li>
+        <li><a href="#serve-locally">Serve locally</a></li>
+        <li><a href="#publish-website">Publish website</a></li>
+        <li><a href="#syntax-highlighting">Syntax highlighting</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 

@@ -1,8 +1,14 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
   Create new page
   #
 
-I&rsquo;m using the Hugo Book Theme, which means it will render the content of the content in the content/docs folder as a book.
+I&rsquo;m using the 
+  Hugo Book Theme, which means it will render the content of the content in the content/docs folder as a book.
 So the creation of a new page go as such :
 hugo new content content/docs/my-new-page.md
 
@@ -14,16 +20,354 @@ Simply use hugo serve --disableFastRender. The disableFastRender option is there
   Publish website
   #
 
-I&rsquo;m using rclone, which is set with a SFTP remote named docs.kntc.be. Enter the following commands :"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://docs.kntc.be/docs/hugo-cheat-sheet/"><meta property="og:site_name" content="Kinetic Docs"><meta property="og:title" content="Hugo cheat sheet"><meta property="og:description" content="Create new page # I’m using the Hugo Book Theme, which means it will render the content of the content in the content/docs folder as a book.
+I&rsquo;m using 
+  rclone, which is set with a SFTP remote named docs.kntc.be. Enter the following commands :">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/hugo-cheat-sheet/">
+  <meta property="og:site_name" content="KNTC Docs">
+  <meta property="og:title" content="Hugo cheat sheet">
+  <meta property="og:description" content="Create new page # I’m using the Hugo Book Theme, which means it will render the content of the content in the content/docs folder as a book.
 So the creation of a new page go as such :
 hugo new content content/docs/my-new-page.md Serve locally # Simply use hugo serve --disableFastRender. The disableFastRender option is there to ensure proper site construction, when you add page, for example.
-Publish website # I’m using rclone, which is set with a SFTP remote named docs.kntc.be. Enter the following commands :"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>Hugo cheat sheet | Kinetic Docs</title><link rel=icon href=/favicon.png><link rel=manifest href=/manifest.json><link rel=canonical href=https://docs.kntc.be/docs/hugo-cheat-sheet/><link rel=stylesheet href=/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin=anonymous><script defer src=/fuse.min.js></script><script defer src=/en.search.min.6e38b64ad452e1836d711979d7ec966c956608f235afbe15b12998c45b5779b9.js integrity="sha256-bji2StRS4YNtcRl51+yWbJVmCPI1r74VsSmYxFtXebk=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/><span>Kinetic Docs</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul><li><a href=/docs/cloud-init-config/>cloud-init config</a></li><li><a href=/docs/configuration.yml/>configuration.yml</a></li><li><a href=/docs/configuration-oidc.yml/>configuration.yml (with OIDC)</a></li><li><a href=/docs/docker-server/>Docker Server</a></li><li><a href=/docs/hacks/>Hacks</a></li><li><a href=/docs/hugo-cheat-sheet/ class=active>Hugo cheat sheet</a></li><li><a href=/docs/links/>Links</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/svg/menu.svg class=book-icon alt=Menu></label><h3>Hugo cheat sheet</h3><label for=toc-control><img src=/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#create-new-page>Create new page</a></li><li><a href=#serve-locally>Serve locally</a></li><li><a href=#publish-website>Publish website</a></li><li><a href=#syntax-highlighting>Syntax highlighting</a></li></ul></nav></aside></header><article class="markdown book-article"><h2 id=create-new-page>Create new page
-<a class=anchor href=#create-new-page>#</a></h2><p>I&rsquo;m using the <a href=https://github.com/alex-shpak/hugo-book>Hugo Book</a> Theme, which means it will render the content of the content in the <code>content/docs</code> folder as a book.</p><p>So the creation of a new page go as such :</p><pre tabindex=0><code>hugo new content content/docs/my-new-page.md
-</code></pre><h2 id=serve-locally>Serve locally
-<a class=anchor href=#serve-locally>#</a></h2><p>Simply use <code>hugo serve --disableFastRender</code>. The <code>disableFastRender</code> option is there to ensure proper site construction, when you add page, for example.</p><h2 id=publish-website>Publish website
-<a class=anchor href=#publish-website>#</a></h2><p>I&rsquo;m using <a href=https://rclone.org/>rclone</a>, which is set with a SFTP remote named <code>docs.kntc.be</code>. Enter the following commands :</p><pre tabindex=0><code>hugo --gc --minify
+Publish website # I’m using rclone, which is set with a SFTP remote named docs.kntc.be. Enter the following commands :">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>Hugo cheat sheet | KNTC Docs</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/hugo-cheat-sheet/">
+<link rel="stylesheet" href="/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.3384ef90493e299fe4efc1930f8cc2cf7c9cf88c2740730926585c6e17eb5a3d.js" integrity="sha256-M4TvkEk&#43;KZ/k78GTD4zCz3yc&#43;IwnQHMJJlhcbhfrWj0=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>KNTC Docs</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cloud-init/" class="">cloud-init</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/" class="">Docker Server</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/configuration.yml/" class="">configuration.yml</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/configuration-oidc.yml/" class="">configuration.yml (with OIDC)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hugo-cheat-sheet/" class="active">Hugo cheat sheet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/links/" class="">Links</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tips/" class="">Tips</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Hugo cheat sheet</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#create-new-page">Create new page</a></li>
+        <li><a href="#serve-locally">Serve locally</a></li>
+        <li><a href="#publish-website">Publish website</a></li>
+        <li><a href="#syntax-highlighting">Syntax highlighting</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="create-new-page">
+  Create new page
+  <a class="anchor" href="#create-new-page">#</a>
+</h2>
+<p>I&rsquo;m using the 
+  <a href="https://github.com/alex-shpak/hugo-book">Hugo Book</a> Theme, which means it will render the content of the content in the <code>content/docs</code> folder as a book.</p>
+<p>So the creation of a new page go as such :</p>
+<pre tabindex="0"><code>hugo new content content/docs/my-new-page.md
+</code></pre><h2 id="serve-locally">
+  Serve locally
+  <a class="anchor" href="#serve-locally">#</a>
+</h2>
+<p>Simply use <code>hugo serve --disableFastRender</code>. The <code>disableFastRender</code> option is there to ensure proper site construction, when you add page, for example.</p>
+<h2 id="publish-website">
+  Publish website
+  <a class="anchor" href="#publish-website">#</a>
+</h2>
+<p>I&rsquo;m using 
+  <a href="https://rclone.org/">rclone</a>, which is set with a SFTP remote named <code>docs.kntc.be</code>. Enter the following commands :</p>
+<pre tabindex="0"><code>hugo --gc --minify
 rclone sync --interactive public/ docs.kntc.be:
-</code></pre><p>The <code>--interactive</code> can be omitted if you simply want to push to prod and erase everything already present. So, as I&rsquo;m copy-pasting these commands, this becomes :</p><pre tabindex=0><code>rclone sync public/ docs.kntc.be:
-</code></pre><h2 id=syntax-highlighting>Syntax highlighting
-<a class=anchor href=#syntax-highlighting>#</a></h2><p>For specific langages, such as YAML, I use <a href=https://gohugo.io/content-management/syntax-highlighting/>syntax highlighting</a> and the <a href=https://gohugo.io/quick-reference/syntax-highlighting-styles/>emacs style</a>.</p><p>Thus, for YAML the header is <code>```yml {style=emacs}</code>. To highligh specific lines, add <code>hl_lines=[2,"4-7"]</code> between the braces, and to add line numbering <code>linenos=inline</code>.</p><p>Here&rsquo;s the <a href=https://gohugo.io/content-management/syntax-highlighting/#languages>list of supported langages</a> - note, for plaintext you can use either <code>text</code> or <code>ucode</code>.</p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#create-new-page>Create new page</a></li><li><a href=#serve-locally>Serve locally</a></li><li><a href=#publish-website>Publish website</a></li><li><a href=#syntax-highlighting>Syntax highlighting</a></li></ul></nav></div></aside></main></body></html>
+</code></pre><p>The <code>--interactive</code> can be omitted if you simply want to push to prod and erase everything already present. So, as I&rsquo;m copy-pasting these commands, this becomes :</p>
+<pre tabindex="0"><code>rclone sync public/ docs.kntc.be:
+</code></pre><h2 id="syntax-highlighting">
+  Syntax highlighting
+  <a class="anchor" href="#syntax-highlighting">#</a>
+</h2>
+<p>For specific langages, such as YAML, I use 
+  <a href="https://gohugo.io/content-management/syntax-highlighting/">syntax highlighting</a> and the 
+  <a href="https://gohugo.io/quick-reference/syntax-highlighting-styles/">emacs style</a>.</p>
+<p>Thus, for YAML the header is <code> ```yml {style=emacs}</code>. To highligh specific lines, add <code>hl_lines=[2,&quot;4-7&quot;]</code> between the braces, and to add line numbering <code>linenos=inline</code>.</p>
+<p>Here&rsquo;s the 
+  <a href="https://gohugo.io/content-management/syntax-highlighting/#languages">list of supported langages</a> - note, for plaintext you can use either <code>text</code> or <code>ucode</code>.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#create-new-page">Create new page</a></li>
+        <li><a href="#serve-locally">Serve locally</a></li>
+        <li><a href="#publish-website">Publish website</a></li>
+        <li><a href="#syntax-highlighting">Syntax highlighting</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -29,24 +29,24 @@ remote = rclone_sftp:DEFAULT/PATH/
 Don&rsquo;t forget to edit the highlighted lines.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/hacks/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/tips/">
   <meta property="og:site_name" content="KNTC Docs">
   <meta property="og:title" content="Tips">
   <meta property="og:description" content="Tips # This sections covers things I don’t do often, but I’m happy to know they exist.
 Set default path in rclone # Usually, I set up rclone to use SFTP. It works, but always ask for the path to destination folder, with no way to set a default path. A solution is to add an alias to your config file (default path ~/.config/rclone/rclone.conf), as shown hereunder.
 [rclone_sftp] type = sftp host = docs.kntc.be user = YOUR_SSH_USER pass = HASHED_SSH_PASSWORD shell_type = unix md5sum_command = md5sum sha1sum_command = sha1sum [docs.kntc.be] type = alias remote = rclone_sftp:DEFAULT/PATH/ Don’t forget to edit the highlighted lines.">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
+  <meta property="og:type" content="website">
 <title>Tips | KNTC Docs</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="http://localhost:1313/docs/hacks/">
+<link rel="canonical" href="http://localhost:1313/docs/tips/">
 <link rel="stylesheet" href="/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.53c104bd53edd1c3232ea26c8be101aa57b0605c5c03b734da9c5e088c2a3313.js" integrity="sha256-U8EEvVPt0cMjLqJsi&#43;EBqlewYFxcA7c02pxeCIwqMxM=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.be04cd7c5b0d09ee1b49869439d1271ae23618ef6f3b164f433658bca9a3de54.js" integrity="sha256-vgTNfFsNCe4bSYaUOdEnGuI2GO9vOxZPQzZYvKmj3lQ=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/docs/tips/index.xml" title="KNTC Docs" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -160,8 +160,13 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hugo-cheat-sheet/" class="">Hugo cheat sheet</a>
+    <a href="/docs/hugo/" class="">Hugo cheat sheet</a>
   
+
+          
+  <ul>
+    
+  </ul>
 
         </li>
       
@@ -176,6 +181,11 @@ https://github.com/alex-shpak/hugo-book
     <a href="/docs/links/" class="">Links</a>
   
 
+          
+  <ul>
+    
+  </ul>
+
         </li>
       
     
@@ -186,8 +196,13 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hacks/" class="active">Tips</a>
+    <a href="/docs/tips/" class="active">Tips</a>
   
+
+          
+  <ul>
+    
+  </ul>
 
         </li>
       
@@ -247,6 +262,7 @@ https://github.com/alex-shpak/hugo-book
       <ul>
         <li><a href="#set-default-path-in-rclone">Set default path in rclone</a></li>
         <li><a href="#nano">Nano</a></li>
+        <li></li>
       </ul>
     </li>
   </ul>
@@ -290,6 +306,10 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#nano">#</a>
 </h2>
 <p>I use nano as a text editor. Sue me. When editing, if you want to keep the line/character number on screen, add the <code>-c</code> flag, and you can open a file at a given line with the <code>+line_nbr</code> flag. To open the file bob.yml at the line 100, with line numbering activated, the command would be <code>nano -c +100 bob.yml</code>.</p>
+<h2 id="">
+  
+  <a class="anchor" href="#">#</a>
+</h2>
 </article>
  
       
@@ -335,6 +355,7 @@ https://github.com/alex-shpak/hugo-book
       <ul>
         <li><a href="#set-default-path-in-rclone">Set default path in rclone</a></li>
         <li><a href="#nano">Nano</a></li>
+        <li></li>
       </ul>
     </li>
   </ul>

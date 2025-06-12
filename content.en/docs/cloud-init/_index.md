@@ -1,5 +1,5 @@
 ---
-title: "cloud-init config"
+title: "cloud-init"
 weight: 1
 # bookFlatSection: false
 # bookToc: true
@@ -9,19 +9,21 @@ weight: 1
 # bookSearchExclude: false
 ---
 
-## Scope
+# cloud-init
 
 This page list the various cloud-init config file I'm using when creating a new server. Unless specified, I'm working with a Debian Bookworm install, on an ARM CPU, using [Hetzner](https://www.hetzner.com/) as a cloud provider.
 
 You can also check [cloud-init official site](https://cloud-init.io/) and [cloud config examples](https://cloudinit.readthedocs.io/en/latest/reference/examples.html).
 
-## Minimal cloud-init config
+## Secured cloud-init config
 
-This minimal config files sets up a user, gives it `sudo` privileges, sets up fail2ban and prevent SSH for root and without a SSH key.
+This minimal config files sets up a user, gives it `sudo` privileges, sets up fail2ban and improves the security of ssh (no root login, no password login).
 
-Replace the content of the highlighted lines as specified. Note : to install mkpasswd for Debian, you have to install the whois package.
+Edit or uncomment of the highlighted lines as specified.
 
-```yml {hl_lines=[2,4,5,7,38] style=emacs}
+Note : to install mkpasswd for Debian, you have to install the whois package with `sudo apt install whois`.
+
+```yml {hl_lines=[2,4,5,7,39,41] style=emacs}
 #cloud-config
 timezone: YOUR_TIMEZONE eg. Europe/London 
 users:
@@ -29,7 +31,8 @@ users:
     passwd: OUTPUT_FROM mkpasswd -m sha-512
     ssh_authorized_keys:
       - YOUR_PUBLIC_KEY
-    groups: sudo
+    groups: sudo 
+    # If you want to remove the need for a password for sudo, add the wheel group as such : groups: sudo, wheel
     shell: /bin/bash
     lock_passwd: false
 packages:
@@ -60,10 +63,12 @@ runcmd:
 # Uncomment to only allow SSH for one or several users (space-separated)
 # For Bob and Alice the line would be - sed -i '$a AllowUsers Bob Alice' /etc/ssh/sshd_config 
 #  - sed -i '$a AllowUsers USERNAME(S)' /etc/ssh/sshd_config 
+# Uncomment to remove the need for a password to enter sudo commands for the wheel group 
+#  - sed -i -e '$a%wheel ALL=(ALL) NOPASSWD: ALL' /etc/sudoers
   - reboot
 ```
 
-## Minimal cloud-init config with docker
+## Secured cloud-init config with docker
 
 Basically the same as the minimal script, but a few lines are added in the ```runcmd``` section to add the docker repository and install docker.
 

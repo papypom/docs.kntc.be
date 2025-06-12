@@ -9,19 +9,19 @@ weight: 1
 # bookSearchExclude: false
 ---
 
-## Docker server
+# Docker server
 
-This section covers the deployement of a standardized portainer instance, using Caddy as reverse proxy. The root system is the [docker-enabled debian](/docs/cloud-init-config/#minimal-cloud-init-config-with-docker).
+This section covers the deployement of a standardized [Portainer](https://www.portainer.io/) instance, using [Caddy](https://caddyserver.com/) as reverse proxy, [Authelia](https://www.authelia.com/) as an two-factor and OIDC (OpenID Connect) provider. The root system is the [docker-enabled debian](/docs/cloud-init/#secured-cloud-init-config-with-docker).
 
 ## Launch portainer
 
-First create the network that will be used by caddy, here I'm naming it caddy.
+First create the network that will be used by [caddy-docker-proxy](https://github.com/lucaslorentz/caddy-docker-proxy), if you give it another name than caddy caddy, you'll have to modify the compose files accordingly.
 
 ``` sudo docker network create caddy```
 
-Create a folder called `portainer`, and within create the following `compose.yml` file. Modify as needed.
+Create the following `compose.yml` file. In your registar, create an A record that point to the server's IP, and edit line 14 accordingly.
 
-```yml {hl_lines=[13,17] style=emacs}
+```yml {hl_lines=[14] style=emacs}
 services:
   portainer:
     image: portainer/portainer-ce:sts
@@ -31,25 +31,36 @@ services:
       - portainer_data:/data
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
+    ## The following lines are needed for caddy-docker-proxy.
     networks:
       - caddy
-    labels:
-      caddy: portainer.example.com
+    labels: 
+      caddy: portainer.example.com #Change for the domain you'll use.
       caddy.reverse_proxy: "{{upstreams 9000}}"
+      ## The following lines are needed for Authelia to provide 2FA.
+      caddy.forward_auth.uri: /api/authz/forward-auth
+      caddy.forward_auth.copy_headers: "Remote-User Remote-Groups Remote-Name Remote-Email"
+      # This next line indicates where to reach Authelia. If you want to limit to a subpath you can modify it as such : caddy.forward_auth: "\subpath app:9091"
+      # If accessing Authelia from another server. put the URL (with the https://) of Authelia instead of app:9091 in the following line.
+      caddy.forward_auth: app:9091 
+      # Uncomment the next if accessing Authelia from another server. header_up is required here as we have Caddy in front of Authelia remotely and we need to let that Caddy know we want to talk to Authelia and not some other site.
+      # caddy.foward_auth.header_up: "Host {upstream_hostport}" 
     
 networks:
-  caddy: #change the network name if needed.
+  caddy:
     external: true
     
 volumes:
   portainer_data: {}
 ```
 
-Then, from within the folder, a simple `sudo docker compose up -d` will spin up portainer on port 9443 (don't forget to append https://).
+You'll note that most of the lines are caddy related, they won't be used at first but that way everything is there from the start.
+
+Bring portainer up with `sudo docker compose up -d` and it'll be reachable on port 9443 (don't forget to append https://).
 
 ## Setting up caddy
 
-Using [caddy-docker-proxy](https://github.com/lucaslorentz/caddy-docker-proxy) which allows for the generation of the caddyfile on the fly by settings labels on the target docking machine (this is the reason behind the 2 -l in the portainer command).
+Using [caddy-docker-proxy](https://github.com/lucaslorentz/caddy-docker-proxy) which allows for the generation of the caddyfile on the fly by settings labels on the target docking machine.
 
 Replace the content of the highlighted lines as specified.
 
@@ -128,7 +139,7 @@ Create the `users_database.yml` in the root folder, and copy-paste the following
 # User file database https://www.authelia.com/reference/guides/passwords/#yaml-format
 # Generate passwords https://www.authelia.com/reference/guides/passwords/#passwords
 users:
-    yourusername:
+    yourusername: #If you plan on using OIDC, has to be different than the one from Portainer.
         password: hashed_password
         displayname: "Your Displayname"
         email: name@example.com
@@ -139,9 +150,9 @@ To hash the password, use the command :
 sudo docker run --rm -it authelia/authelia:latest authelia crypto hash generate argon2
 ```
 
-Create the ´configuration.yml´ file and paste the [pre-created version](/docs/configuration.yml), editing the lines as specified.
+Create the ´configuration.yml´ file and paste the [pre-created version](/docs/docker/configuration.yml), editing the lines as specified.
 
-Once all the file are created, time to set everything as write-only :
+Once all the file are created, time to lock everything up :
 
 ```
 sudo chown -R root:root /opt/authelia
@@ -150,9 +161,9 @@ sudo chmod -R 600 /opt/authelia
 
 ### Docker-compose for Authelia
 
-Caddy should be already up and running, go to your DNS and set the A record for Authelia and create the following compose file. Two values should be edited, the domain on line 22, and the REDIS_PASSWORD on line 39
+Caddy should be already up and running, go to your registar, set the A record for Authelia and create the following compose file. Two values should be edited, the domain on line 25, and the REDIS_PASSWORD on line 42
 
-```yml {hl_lines=[22,39] style=emacs}
+```yml {hl_lines=[25,42] style=emacs}
 name: "authelia"
 services:
   app:
@@ -210,46 +221,13 @@ volumes:
   redis: {}
 ```
 
-Authelia should now be reachable via the password you've previously hashed. Confirm this by navigating to the address you've set up for Authelia. Once all is working, it is now time to ...
+Authelia should now be reachable via the password you've previously hashed. Confirm this by navigating to the address you've set up for Authelia. Also, try to access Portainer with the address you've set for Portainer, without the port number. Authelia should pop-up and ask for authentification before allowing you to move further.
 
-### Setting up authentification for the portainer via Authelia
-
-Add the needed labels to your docker compose file for portainer. We've also removed the port 9443, which is not used anymore.
-
-```yml {hl_lines=[13] style=emacs}
-services:
-  portainer:
-    image: portainer/portainer-ce:sts
-#    ports:
-#      - 9443:9443
-    volumes:
-      - portainer_data:/data
-      - /var/run/docker.sock:/var/run/docker.sock
-    restart: unless-stopped
-    networks:
-      - caddy
-    labels:
-      caddy: portainer.example.com
-      caddy.reverse_proxy: "{{upstreams 9000}}"
-      caddy.forward_auth: app:9091 #Note : if accessing an external authelia, put the URL here
-      caddy.forward_auth.uri: /api/authz/forward-auth
-      caddy.forward_auth.copy_headers: "Remote-User Remote-Groups Remote-Name Remote-Email"
-# Uncomment this line if accessing an external Authelia. header_up is required here as we have Caddy in front of Authelia remotely and we need to let that Caddy know we want to talk to Authelia and not some other site.
-#      caddy.foward_auth.header_up: "Host {upstream_hostport}" 
-    
-networks:
-  caddy: #change the network name if needed.
-    external: true
-    
-volumes:
-  portainer_data: {}
-```
-
-If you want to limit to a subpath you can add it to the line `caddy.forward_auth: app:9091` as such `caddy.forward_auth: "\subpath app:9091"`
+If everything is working, you can edit the `compose.yml` file for Portainer and comment the port 9443. This will mean that from now on, you have to identify with Authelia to reach Portainer.
 
 ## Setting up OIDC for Portainer
 
-Of course, you now have to enter 2 passwords and 1 TOTP to access your portainer, which is, to say the least, tedious. Thus the next and final step is to set up Authelia as an OIDC provider, and allow the config to be digested by Portainer.
+Of course, you now have to enter 2 passwords and 1 TOTP to access Portainer, which is, to say the least, tedious. Thus the next and final step is to set up Authelia as an OIDC provider, and set Portainer to use it.
 
 First an additional secret and a 2048 bits RSA key will be needed, so go back to the folder `/opt/authelia/secrets/` and create them :
 ```
@@ -263,11 +241,11 @@ A hashed password will also be needed, so choose a password, and hash it using t
 sudo docker run --rm -it authelia/authelia:latest authelia crypto hash generate pbkdf2
 ```
 
-Now, you have to edit the monstruous `configuration.yml` file to add OIDC, [see instructions](/docs/configuration-oidc.yml).
+Now, you have to edit the monstruous `configuration.yml` file to add OIDC, [see instructions](/docs/docker/configuration-oidc.yml).
 
 Once the secrets are created and the file modified, you can restart Authelia after uncommenting the `AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET_FILE` line in the compose file. 
 
-And finally, you have to configure Portainer, as such :
+And finally, you have to configure Portainer :
 
 - Visit Settings
 - Visit Authentication
@@ -280,10 +258,12 @@ And finally, you have to configure Portainer, as such :
     - Authorization URL: https://auth.example.com/api/oidc/authorization
     - Access Token URL: https://auth.example.com/api/oidc/token
     - Resource URL: https://auth.example.com/api/oidc/userinfo
-    - Redirect URL: https://portainer.example.com
-    - Logout URL: https://auth.example.com
-    - User Identifier: preferred_username *NOTE : you have to write preferred_username, not write your username !!!*
+    - Redirect URL: https://portainer.example.com *NOTE : has to match the redirect_uris: parameter of the configuration.yml file exactly*
+    - Logout URL: https://auth.example.com 
+    - User Identifier: preferred_username *NOTE : you have to write preferred_username, not write your username*
     - Scopes: openid profile groups email
     - Auth Style: In Params
 
 If you haven't selected Automatic user provision, you have to create a user which matches your authelia username in order to login with Oauth. So if your user in Authelia is called MyUsername, you have to add a user MyUsername in portainer.
+
+And voilà, click the big "OAuth" button while loggin in to Portainer, and it should automagically log you in.

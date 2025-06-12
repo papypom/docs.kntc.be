@@ -1,1 +1,27 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"><url><loc>https://docs.kntc.be/docs/cloud-init-config/</loc></url><url><loc>https://docs.kntc.be/docs/configuration.yml/</loc></url><url><loc>https://docs.kntc.be/docs/configuration-oidc.yml/</loc></url><url><loc>https://docs.kntc.be/docs/docker-server/</loc></url><url><loc>https://docs.kntc.be/docs/hacks/</loc></url><url><loc>https://docs.kntc.be/docs/hugo-cheat-sheet/</loc></url><url><loc>https://docs.kntc.be/docs/links/</loc></url><url><loc>https://docs.kntc.be/categories/</loc></url><url><loc>https://docs.kntc.be/docs/</loc></url><url><loc>https://docs.kntc.be/</loc></url><url><loc>https://docs.kntc.be/tags/</loc></url></urlset>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>http://localhost:1313/docs/cloud-init/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/docker/configuration.yml/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/docker/configuration-oidc.yml/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/docker/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/hugo-cheat-sheet/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/links/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/hacks/</loc>
+  </url><url>
+    <loc>http://localhost:1313/categories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/</loc>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
+  </url>
+</urlset>

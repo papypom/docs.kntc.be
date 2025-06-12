@@ -7,59 +7,40 @@
   Docker server
   #
 
-This section covers the deployement of a standardized portainer instance, using Caddy as reverse proxy. The root system is the 
+This section covers the deployement of a standardized 
+  Portainer instance, using 
+  Caddy as reverse proxy, 
+  Authelia as an two-factor and OIDC (OpenID Connect) provider. The root system is the 
   docker-enabled debian.
 
   Launch portainer
   #
 
-First create the network that will be used by caddy, here I&rsquo;m naming it caddy.
+First create the network that will be used by 
+  caddy-docker-proxy, if you give it another name than caddy caddy, you&rsquo;ll have to modify the compose files accordingly.
  sudo docker network create caddy
-Create a folder called portainer, and within create the following compose.yml file. Modify as needed.
-services:
-  portainer:
-    image: portainer/portainer-ce:sts
-    ports:
-      - 9443:9443
-    volumes:
-      - portainer_data:/data
-      - /var/run/docker.sock:/var/run/docker.sock
-    restart: unless-stopped
-    networks:
-      - caddy
-    labels:
-      caddy: portainer.example.com
-      caddy.reverse_proxy: &#34;{{upstreams 9000}}&#34;
-    
-networks:
-  caddy: #change the network name if needed.
-    external: true
-    
-volumes:
-  portainer_data: {}
-Then, from within the folder, a simple sudo docker compose up -d will spin up portainer on port 9443 (don&rsquo;t forget to append https://).">
+Create the following compose.yml file. In your registar, create an A record that point to the server&rsquo;s IP, and edit line 14 accordingly.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/docker-server/">
-  <meta property="og:site_name" content="Kinetic Docs">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/docker/">
+  <meta property="og:site_name" content="KNTC Docs">
   <meta property="og:title" content="Docker Server">
-  <meta property="og:description" content="Docker server # This section covers the deployement of a standardized portainer instance, using Caddy as reverse proxy. The root system is the docker-enabled debian.
-Launch portainer # First create the network that will be used by caddy, here I’m naming it caddy.
+  <meta property="og:description" content="Docker server # This section covers the deployement of a standardized Portainer instance, using Caddy as reverse proxy, Authelia as an two-factor and OIDC (OpenID Connect) provider. The root system is the docker-enabled debian.
+Launch portainer # First create the network that will be used by caddy-docker-proxy, if you give it another name than caddy caddy, you’ll have to modify the compose files accordingly.
 sudo docker network create caddy
-Create a folder called portainer, and within create the following compose.yml file. Modify as needed.
-services: portainer: image: portainer/portainer-ce:sts ports: - 9443:9443 volumes: - portainer_data:/data - /var/run/docker.sock:/var/run/docker.sock restart: unless-stopped networks: - caddy labels: caddy: portainer.example.com caddy.reverse_proxy: &#34;{{upstreams 9000}}&#34; networks: caddy: #change the network name if needed. external: true volumes: portainer_data: {} Then, from within the folder, a simple sudo docker compose up -d will spin up portainer on port 9443 (don’t forget to append https://).">
+Create the following compose.yml file. In your registar, create an A record that point to the server’s IP, and edit line 14 accordingly.">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
-<title>Docker Server | Kinetic Docs</title>
+  <meta property="og:type" content="website">
+<title>Docker Server | KNTC Docs</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="http://localhost:1313/docs/docker-server/">
+<link rel="canonical" href="http://localhost:1313/docs/docker/">
 <link rel="stylesheet" href="/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.41f4b5493a66ffe67ebc806b69e6ebc26fa2b1e40420035a46a8a2e790ee72ce.js" integrity="sha256-QfS1STpm/&#43;Z&#43;vIBraebrwm&#43;iseQEIANaRqii55Ducs4=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.be04cd7c5b0d09ee1b49869439d1271ae23618ef6f3b164f433658bca9a3de54.js" integrity="sha256-vgTNfFsNCe4bSYaUOdEnGuI2GO9vOxZPQzZYvKmj3lQ=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/docs/docker/index.xml" title="KNTC Docs" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -75,7 +56,7 @@ https://github.com/alex-shpak/hugo-book
         
   <nav>
 <h2 class="book-brand">
-  <a class="flex align-center" href="/"><span>Kinetic Docs</span>
+  <a class="flex align-center" href="/"><span>KNTC Docs</span>
   </a>
 </h2>
 
@@ -111,7 +92,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/cloud-init/" class="">cloud-init config</a>
+    <a href="/docs/cloud-init/" class="">cloud-init</a>
   
 
           
@@ -129,21 +110,39 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <a href="/docs/docker/" class="active">Docker Server</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/configuration.yml/" class="">configuration.yml</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/docker/configuration-oidc.yml/" class="">configuration.yml (with OIDC)</a>
   
 
         </li>
       
     
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/docker-server/" class="active">Docker Server</a>
-  
+  </ul>
 
         </li>
       
@@ -155,21 +154,13 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/hacks/" class="">Hacks</a>
+    <a href="/docs/hugo/" class="">Hugo cheat sheet</a>
   
 
-        </li>
-      
-    
-      
-        <li>
           
-  
-  
-
-  
-    <a href="/docs/hugo-cheat-sheet/" class="">Hugo cheat sheet</a>
-  
+  <ul>
+    
+  </ul>
 
         </li>
       
@@ -183,6 +174,29 @@ https://github.com/alex-shpak/hugo-book
   
     <a href="/docs/links/" class="">Links</a>
   
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tips/" class="">Tips</a>
+  
+
+          
+  <ul>
+    
+  </ul>
 
         </li>
       
@@ -238,16 +252,14 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#docker-server">Docker server</a>
       <ul>
-        <li><a href="#docker-server">Docker server</a></li>
         <li><a href="#launch-portainer">Launch portainer</a></li>
         <li><a href="#setting-up-caddy">Setting up caddy</a></li>
         <li><a href="#setting-up-authelia">Setting up Authelia</a>
           <ul>
             <li><a href="#preparing-the-needed-files">Preparing the needed files</a></li>
             <li><a href="#docker-compose-for-authelia">Docker-compose for Authelia</a></li>
-            <li><a href="#setting-up-authentification-for-the-portainer-via-authelia">Setting up authentification for the portainer via Authelia</a></li>
           </ul>
         </li>
         <li><a href="#setting-up-oidc-for-portainer">Setting up OIDC for Portainer</a></li>
@@ -265,19 +277,23 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h2 id="docker-server">
+  <article class="markdown book-article"><h1 id="docker-server">
   Docker server
   <a class="anchor" href="#docker-server">#</a>
-</h2>
-<p>This section covers the deployement of a standardized portainer instance, using Caddy as reverse proxy. The root system is the 
-  <a href="/docs/cloud-init-config/#minimal-cloud-init-config-with-docker">docker-enabled debian</a>.</p>
+</h1>
+<p>This section covers the deployement of a standardized 
+  <a href="https://www.portainer.io/">Portainer</a> instance, using 
+  <a href="https://caddyserver.com/">Caddy</a> as reverse proxy, 
+  <a href="https://www.authelia.com/">Authelia</a> as an two-factor and OIDC (OpenID Connect) provider. The root system is the 
+  <a href="/docs/cloud-init/#secured-cloud-init-config-with-docker">docker-enabled debian</a>.</p>
 <h2 id="launch-portainer">
   Launch portainer
   <a class="anchor" href="#launch-portainer">#</a>
 </h2>
-<p>First create the network that will be used by caddy, here I&rsquo;m naming it caddy.</p>
+<p>First create the network that will be used by 
+  <a href="https://github.com/lucaslorentz/caddy-docker-proxy">caddy-docker-proxy</a>, if you give it another name than caddy caddy, you&rsquo;ll have to modify the compose files accordingly.</p>
 <p><code> sudo docker network create caddy</code></p>
-<p>Create a folder called <code>portainer</code>, and within create the following <code>compose.yml</code> file. Modify as needed.</p>
+<p>Create the following <code>compose.yml</code> file. In your registar, create an A record that point to the server&rsquo;s IP, and edit line 14 accordingly.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">services</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">portainer</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">image</span>:<span style="color:#bbb"> </span>portainer/portainer-ce:sts<span style="color:#bbb">
@@ -287,25 +303,35 @@ https://github.com/alex-shpak/hugo-book
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- portainer_data:/data<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- /var/run/docker.sock:/var/run/docker.sock<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">restart</span>:<span style="color:#bbb"> </span>unless-stopped<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-style:italic">## The following lines are needed for caddy-docker-proxy.</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">networks</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- caddy<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">labels</span>:<span style="color:#bbb">
-</span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy</span>:<span style="color:#bbb"> </span>portainer.example.com<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">labels</span>:<span style="color:#bbb"> 
+</span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy</span>:<span style="color:#bbb"> </span>portainer.example.com<span style="color:#bbb"> </span><span style="color:#080;font-style:italic">#Change for the domain you&#39;ll use.</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy.reverse_proxy</span>:<span style="color:#bbb"> </span><span style="color:#b44">&#34;{{upstreams 9000}}&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#080;font-style:italic">## The following lines are needed for Authelia to provide 2FA.</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy.forward_auth.uri</span>:<span style="color:#bbb"> </span>/api/authz/forward-auth<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy.forward_auth.copy_headers</span>:<span style="color:#bbb"> </span><span style="color:#b44">&#34;Remote-User Remote-Groups Remote-Name Remote-Email&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#080;font-style:italic"># This next line indicates where to reach Authelia. If you want to limit to a subpath you can modify it as such : caddy.forward_auth: &#34;\subpath app:9091&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#080;font-style:italic"># If accessing Authelia from another server. put the URL (with the https://) of Authelia instead of app:9091 in the following line.</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy.forward_auth</span>:<span style="color:#bbb"> </span>app:9091 <span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#080;font-style:italic"># Uncomment the next if accessing Authelia from another server. header_up is required here as we have Caddy in front of Authelia remotely and we need to let that Caddy know we want to talk to Authelia and not some other site.</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#080;font-style:italic"># caddy.foward_auth.header_up: &#34;Host {upstream_hostport}&#34; </span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#008000;font-weight:bold">networks</span>:<span style="color:#bbb">
-</span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">caddy</span>:<span style="color:#bbb"> </span><span style="color:#080;font-style:italic">#change the network name if needed.</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">caddy</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">external</span>:<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">true</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#008000;font-weight:bold">volumes</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">portainer_data</span>:<span style="color:#bbb"> </span>{}<span style="color:#bbb">
-</span></span></span></code></pre></div><p>Then, from within the folder, a simple <code>sudo docker compose up -d</code> will spin up portainer on port 9443 (don&rsquo;t forget to append https://).</p>
+</span></span></span></code></pre></div><p>You&rsquo;ll note that most of the lines are caddy related, they won&rsquo;t be used at first but that way everything is there from the start.</p>
+<p>Bring portainer up with <code>sudo docker compose up -d</code> and it&rsquo;ll be reachable on port 9443 (don&rsquo;t forget to append https://).</p>
 <h2 id="setting-up-caddy">
   Setting up caddy
   <a class="anchor" href="#setting-up-caddy">#</a>
 </h2>
 <p>Using 
-  <a href="https://github.com/lucaslorentz/caddy-docker-proxy">caddy-docker-proxy</a> which allows for the generation of the caddyfile on the fly by settings labels on the target docking machine (this is the reason behind the 2 -l in the portainer command).</p>
+  <a href="https://github.com/lucaslorentz/caddy-docker-proxy">caddy-docker-proxy</a> which allows for the generation of the caddyfile on the fly by settings labels on the target docking machine.</p>
 <p>Replace the content of the highlighted lines as specified.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">services</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">caddy</span>:<span style="color:#bbb">
@@ -366,22 +392,22 @@ tr -dc A-Za-z0-9 &lt;/dev/urandom | head -c 80 | { cat; echo; } | sudo tee REDIS
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#080;font-style:italic"># User file database https://www.authelia.com/reference/guides/passwords/#yaml-format</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic"># Generate passwords https://www.authelia.com/reference/guides/passwords/#passwords</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#008000;font-weight:bold">users</span>:<span style="color:#bbb">
-</span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">yourusername</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">yourusername</span>:<span style="color:#bbb"> </span><span style="color:#080;font-style:italic">#If you plan on using OIDC, has to be different than the one from Portainer.</span><span style="color:#bbb">
 </span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">        </span><span style="color:#008000;font-weight:bold">password</span>:<span style="color:#bbb"> </span>hashed_password<span style="color:#bbb">
 </span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">        </span><span style="color:#008000;font-weight:bold">displayname</span>:<span style="color:#bbb"> </span><span style="color:#b44">&#34;Your Displayname&#34;</span><span style="color:#bbb">
 </span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">        </span><span style="color:#008000;font-weight:bold">email</span>:<span style="color:#bbb"> </span>name@example.com<span style="color:#bbb">
 </span></span></span></code></pre></div><p>To hash the password, use the command :</p>
 <pre tabindex="0"><code>sudo docker run --rm -it authelia/authelia:latest authelia crypto hash generate argon2
 </code></pre><p>Create the ´configuration.yml´ file and paste the 
-  <a href="/docs/configuration.yml">pre-created version</a>, editing the lines as specified.</p>
-<p>Once all the file are created, time to set everything as write-only :</p>
+  <a href="/docs/docker/configuration.yml/">pre-created version</a>, editing the lines as specified.</p>
+<p>Once all the file are created, time to lock everything up :</p>
 <pre tabindex="0"><code>sudo chown -R root:root /opt/authelia
 sudo chmod -R 600 /opt/authelia
 </code></pre><h3 id="docker-compose-for-authelia">
   Docker-compose for Authelia
   <a class="anchor" href="#docker-compose-for-authelia">#</a>
 </h3>
-<p>Caddy should be already up and running, go to your DNS and set the A record for Authelia and create the following compose file. Two values should be edited, the domain on line 22, and the REDIS_PASSWORD on line 39</p>
+<p>Caddy should be already up and running, go to your registar, set the A record for Authelia and create the following compose file. Two values should be edited, the domain on line 25, and the REDIS_PASSWORD on line 42</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">name</span>:<span style="color:#bbb"> </span><span style="color:#b44">&#34;authelia&#34;</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#008000;font-weight:bold">services</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">app</span>:<span style="color:#bbb">
@@ -403,10 +429,10 @@ sudo chmod -R 600 /opt/authelia
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic"># Only uncomment this line if you are using OIDC - if not, Authelia will not start</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic">#      AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET_FILE: /config/secrets/HMAC_SECRET</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">networks</span>:<span style="color:#bbb">
-</span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">      </span>- caddy<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- caddy<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- authelia<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">labels</span>:<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy</span>:<span style="color:#bbb"> </span>auth.example.com<span style="color:#bbb">
+</span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy</span>:<span style="color:#bbb"> </span>auth.example.com<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy.reverse_proxy</span>:<span style="color:#bbb"> </span><span style="color:#b44">&#34;{{upstreams 9091}}&#34;</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">database</span>:<span style="color:#bbb">
@@ -420,10 +446,10 @@ sudo chmod -R 600 /opt/authelia
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">POSTGRES_PASSWORD_FILE</span>:<span style="color:#bbb"> </span><span style="color:#b44">&#34;/STORAGE_PASSWORD&#34;</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">networks</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- authelia<span style="color:#bbb">
-</span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">redis</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">image</span>:<span style="color:#bbb"> </span>redis:7<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">command</span>:<span style="color:#bbb"> </span><span style="color:#b44">&#34;redis-server --save 60 1 --loglevel warning --requirepass EDIT_WITH_THE_REDIS_PASSWORD_CONTENT&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">command</span>:<span style="color:#bbb"> </span><span style="color:#b44">&#34;redis-server --save 60 1 --loglevel warning --requirepass EDIT_WITH_THE_REDIS_PASSWORD_CONTENT&#34;</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">volumes</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- redis:/data<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">networks</span>:<span style="color:#bbb">
@@ -437,53 +463,22 @@ sudo chmod -R 600 /opt/authelia
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#008000;font-weight:bold">volumes</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">postgres</span>:<span style="color:#bbb"> </span>{}<span style="color:#bbb"> 
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">redis</span>:<span style="color:#bbb"> </span>{}<span style="color:#bbb">
-</span></span></span></code></pre></div><p>Authelia should now be reachable via the password you&rsquo;ve previously hashed. Confirm this by navigating to the address you&rsquo;ve set up for Authelia. Once all is working, it is now time to &hellip;</p>
-<h3 id="setting-up-authentification-for-the-portainer-via-authelia">
-  Setting up authentification for the portainer via Authelia
-  <a class="anchor" href="#setting-up-authentification-for-the-portainer-via-authelia">#</a>
-</h3>
-<p>Add the needed labels to your docker compose file for portainer. We&rsquo;ve also removed the port 9443, which is not used anymore.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">services</span>:<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">portainer</span>:<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">image</span>:<span style="color:#bbb"> </span>portainer/portainer-ce:sts<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic">#    ports:</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic">#      - 9443:9443</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">volumes</span>:<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- portainer_data:/data<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- /var/run/docker.sock:/var/run/docker.sock<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">restart</span>:<span style="color:#bbb"> </span>unless-stopped<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">networks</span>:<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- caddy<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">labels</span>:<span style="color:#bbb">
-</span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy</span>:<span style="color:#bbb"> </span>portainer.example.com<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy.reverse_proxy</span>:<span style="color:#bbb"> </span><span style="color:#b44">&#34;{{upstreams 9000}}&#34;</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy.forward_auth: app:9091 #Note </span>:<span style="color:#bbb"> </span>if accessing an external authelia, put the URL here<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy.forward_auth.uri</span>:<span style="color:#bbb"> </span>/api/authz/forward-auth<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy.forward_auth.copy_headers</span>:<span style="color:#bbb"> </span><span style="color:#b44">&#34;Remote-User Remote-Groups Remote-Name Remote-Email&#34;</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic"># Uncomment this line if accessing an external Authelia. header_up is required here as we have Caddy in front of Authelia remotely and we need to let that Caddy know we want to talk to Authelia and not some other site.</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic">#      caddy.foward_auth.header_up: &#34;Host {upstream_hostport}&#34; </span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#008000;font-weight:bold">networks</span>:<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">caddy</span>:<span style="color:#bbb"> </span><span style="color:#080;font-style:italic">#change the network name if needed.</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">external</span>:<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">true</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#008000;font-weight:bold">volumes</span>:<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">portainer_data</span>:<span style="color:#bbb"> </span>{}<span style="color:#bbb">
-</span></span></span></code></pre></div><p>If you want to limit to a subpath you can add it to the line <code>caddy.forward_auth: app:9091</code> as such <code>caddy.forward_auth: &quot;\subpath app:9091&quot;</code></p>
+</span></span></span></code></pre></div><p>Authelia should now be reachable via the password you&rsquo;ve previously hashed. Confirm this by navigating to the address you&rsquo;ve set up for Authelia. Also, try to access Portainer with the address you&rsquo;ve set for Portainer, without the port number. Authelia should pop-up and ask for authentification before allowing you to move further.</p>
+<p>If everything is working, you can edit the <code>compose.yml</code> file for Portainer and comment the port 9443. This will mean that from now on, you have to identify with Authelia to reach Portainer.</p>
 <h2 id="setting-up-oidc-for-portainer">
   Setting up OIDC for Portainer
   <a class="anchor" href="#setting-up-oidc-for-portainer">#</a>
 </h2>
-<p>Of course, you now have to enter 2 passwords and 1 TOTP to access your portainer, which is, to say the least, tedious. Thus the next and final step is to set up Authelia as an OIDC provider, and allow the config to be digested by Portainer.</p>
+<p>Of course, you now have to enter 2 passwords and 1 TOTP to access Portainer, which is, to say the least, tedious. Thus the next and final step is to set up Authelia as an OIDC provider, and set Portainer to use it.</p>
 <p>First an additional secret and a 2048 bits RSA key will be needed, so go back to the folder <code>/opt/authelia/secrets/</code> and create them :</p>
 <pre tabindex="0"><code>tr -dc A-Za-z0-9 &lt;/dev/urandom | head -c 80 | { cat; echo; } | sudo tee HMAC_SECRET
 openssl genrsa -out oidc.pem 2048
 </code></pre><p>A hashed password will also be needed, so choose a password, and hash it using the following command :</p>
 <pre tabindex="0"><code>sudo docker run --rm -it authelia/authelia:latest authelia crypto hash generate pbkdf2
 </code></pre><p>Now, you have to edit the monstruous <code>configuration.yml</code> file to add OIDC, 
-  <a href="/docs/configuration-oidc.yml">see instructions</a>.</p>
+  <a href="/docs/docker/configuration-oidc.yml/">see instructions</a>.</p>
 <p>Once the secrets are created and the file modified, you can restart Authelia after uncommenting the <code>AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET_FILE</code> line in the compose file.</p>
-<p>And finally, you have to configure Portainer, as such :</p>
+<p>And finally, you have to configure Portainer :</p>
 <ul>
 <li>Visit Settings</li>
 <li>Visit Authentication</li>
@@ -502,10 +497,10 @@ openssl genrsa -out oidc.pem 2048
 <li>Resource URL: 
   <a href="https://auth.example.com/api/oidc/userinfo">https://auth.example.com/api/oidc/userinfo</a></li>
 <li>Redirect URL: 
-  <a href="https://portainer.example.com">https://portainer.example.com</a></li>
+  <a href="https://portainer.example.com">https://portainer.example.com</a> <em>NOTE : has to match the redirect_uris: parameter of the configuration.yml file exactly</em></li>
 <li>Logout URL: 
   <a href="https://auth.example.com">https://auth.example.com</a></li>
-<li>User Identifier: preferred_username <em>NOTE : you have to write preferred_username, not write your username !!!</em></li>
+<li>User Identifier: preferred_username <em>NOTE : you have to write preferred_username, not write your username</em></li>
 <li>Scopes: openid profile groups email</li>
 <li>Auth Style: In Params</li>
 </ul>
@@ -514,6 +509,7 @@ openssl genrsa -out oidc.pem 2048
 </li>
 </ul>
 <p>If you haven&rsquo;t selected Automatic user provision, you have to create a user which matches your authelia username in order to login with Oauth. So if your user in Authelia is called MyUsername, you have to add a user MyUsername in portainer.</p>
+<p>And voilà, click the big &ldquo;OAuth&rdquo; button while loggin in to Portainer, and it should automagically log you in.</p>
 </article>
  
       
@@ -555,16 +551,14 @@ openssl genrsa -out oidc.pem 2048
   
 <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#docker-server">Docker server</a>
       <ul>
-        <li><a href="#docker-server">Docker server</a></li>
         <li><a href="#launch-portainer">Launch portainer</a></li>
         <li><a href="#setting-up-caddy">Setting up caddy</a></li>
         <li><a href="#setting-up-authelia">Setting up Authelia</a>
           <ul>
             <li><a href="#preparing-the-needed-files">Preparing the needed files</a></li>
             <li><a href="#docker-compose-for-authelia">Docker-compose for Authelia</a></li>
-            <li><a href="#setting-up-authentification-for-the-portainer-via-authelia">Setting up authentification for the portainer via Authelia</a></li>
           </ul>
         </li>
         <li><a href="#setting-up-oidc-for-portainer">Setting up OIDC for Portainer</a></li>

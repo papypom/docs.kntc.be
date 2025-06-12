@@ -1,5 +1,5 @@
 ---
-title: "Hacks"
+title: "Tips"
 weight: 1
 # bookFlatSection: false
 # bookToc: true
@@ -9,9 +9,9 @@ weight: 1
 # bookSearchExclude: false
 ---
 
-## Hacks
+# Tips
 
-This sections covers a bit of everything, each time I had to go off the beaten track to do stuff.
+This sections covers things I don't do often, but I'm happy to know they exist.
 
 ## Set default path in rclone
 
@@ -33,3 +33,9 @@ remote = rclone_sftp:DEFAULT/PATH/
 ```
 
 Don't forget to edit the highlighted lines.
+
+## Nano
+
+I use nano as a text editor. Sue me. When editing, if you want to keep the line/character number on screen, add the `-c` flag, and you can open a file at a given line with the `+line_nbr` flag. To open the file bob.yml at the line 100, with line numbering activated, the command would be `nano -c +100 bob.yml`.
+
+## 

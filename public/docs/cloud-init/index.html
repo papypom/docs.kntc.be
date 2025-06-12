@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  Scope
+  cloud-init
   #
 
 This page list the various cloud-init config file I&rsquo;m using when creating a new server. Unless specified, I&rsquo;m working with a Debian Bookworm install, on an ARM CPU, using 
@@ -13,30 +13,30 @@ You can also check
   cloud-init official site and 
   cloud config examples.
 
-  Minimal cloud-init config
+  Secured cloud-init config
   #
 
-This minimal config files sets up a user, gives it sudo privileges, sets up fail2ban and prevent SSH for root and without a SSH key.">
+This minimal config files sets up a user, gives it sudo privileges, sets up fail2ban and improves the security of ssh (no root login, no password login).">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/cloud-init-config/">
-  <meta property="og:site_name" content="Kinetic Docs">
-  <meta property="og:title" content="cloud-init config">
-  <meta property="og:description" content="Scope # This page list the various cloud-init config file I’m using when creating a new server. Unless specified, I’m working with a Debian Bookworm install, on an ARM CPU, using Hetzner as a cloud provider.
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/cloud-init/">
+  <meta property="og:site_name" content="KNTC Docs">
+  <meta property="og:title" content="cloud-init">
+  <meta property="og:description" content="cloud-init # This page list the various cloud-init config file I’m using when creating a new server. Unless specified, I’m working with a Debian Bookworm install, on an ARM CPU, using Hetzner as a cloud provider.
 You can also check cloud-init official site and cloud config examples.
-Minimal cloud-init config # This minimal config files sets up a user, gives it sudo privileges, sets up fail2ban and prevent SSH for root and without a SSH key.">
+Secured cloud-init config # This minimal config files sets up a user, gives it sudo privileges, sets up fail2ban and improves the security of ssh (no root login, no password login).">
   <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="docs">
-<title>cloud-init config | Kinetic Docs</title>
+  <meta property="og:type" content="website">
+<title>cloud-init | KNTC Docs</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="http://localhost:1313/docs/cloud-init-config/">
+<link rel="canonical" href="http://localhost:1313/docs/cloud-init/">
 <link rel="stylesheet" href="/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.6e38b64ad452e1836d711979d7ec966c956608f235afbe15b12998c45b5779b9.js" integrity="sha256-bji2StRS4YNtcRl51&#43;yWbJVmCPI1r74VsSmYxFtXebk=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.be04cd7c5b0d09ee1b49869439d1271ae23618ef6f3b164f433658bca9a3de54.js" integrity="sha256-vgTNfFsNCe4bSYaUOdEnGuI2GO9vOxZPQzZYvKmj3lQ=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/docs/cloud-init/index.xml" title="KNTC Docs" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -52,7 +52,7 @@ https://github.com/alex-shpak/hugo-book
         
   <nav>
 <h2 class="book-brand">
-  <a class="flex align-center" href="/"><span>Kinetic Docs</span>
+  <a class="flex align-center" href="/"><span>KNTC Docs</span>
   </a>
 </h2>
 
@@ -88,7 +88,38 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/cloud-init-config/" class="active">cloud-init config</a>
+    <a href="/docs/cloud-init/" class="active">cloud-init</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/" class="">Docker Server</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/configuration.yml/" class="">configuration.yml</a>
   
 
         </li>
@@ -101,8 +132,13 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/configuration.yml/" class="">configuration.yml</a>
+    <a href="/docs/docker/configuration-oidc.yml/" class="">configuration.yml (with OIDC)</a>
   
+
+        </li>
+      
+    
+  </ul>
 
         </li>
       
@@ -114,47 +150,13 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/configuration-oidc.yml/" class="">configuration.yml (with OIDC)</a>
+    <a href="/docs/hugo/" class="">Hugo cheat sheet</a>
   
 
-        </li>
-      
-    
-      
-        <li>
           
-  
-  
-
-  
-    <a href="/docs/docker-server/" class="">Docker Server</a>
-  
-
-        </li>
-      
+  <ul>
     
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hacks/" class="">Hacks</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/hugo-cheat-sheet/" class="">Hugo cheat sheet</a>
-  
+  </ul>
 
         </li>
       
@@ -168,6 +170,29 @@ https://github.com/alex-shpak/hugo-book
   
     <a href="/docs/links/" class="">Links</a>
   
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tips/" class="">Tips</a>
+  
+
+          
+  <ul>
+    
+  </ul>
 
         </li>
       
@@ -207,7 +232,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>cloud-init config</h3>
+  <h3>cloud-init</h3>
 
   <label for="toc-control">
     
@@ -223,11 +248,10 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#cloud-init">cloud-init</a>
       <ul>
-        <li><a href="#scope">Scope</a></li>
-        <li><a href="#minimal-cloud-init-config">Minimal cloud-init config</a></li>
-        <li><a href="#minimal-cloud-init-config-with-docker">Minimal cloud-init config with docker</a></li>
+        <li><a href="#secured-cloud-init-config">Secured cloud-init config</a></li>
+        <li><a href="#secured-cloud-init-config-with-docker">Secured cloud-init config with docker</a></li>
       </ul>
     </li>
   </ul>
@@ -242,21 +266,22 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h2 id="scope">
-  Scope
-  <a class="anchor" href="#scope">#</a>
-</h2>
+  <article class="markdown book-article"><h1 id="cloud-init">
+  cloud-init
+  <a class="anchor" href="#cloud-init">#</a>
+</h1>
 <p>This page list the various cloud-init config file I&rsquo;m using when creating a new server. Unless specified, I&rsquo;m working with a Debian Bookworm install, on an ARM CPU, using 
   <a href="https://www.hetzner.com/">Hetzner</a> as a cloud provider.</p>
 <p>You can also check 
   <a href="https://cloud-init.io/">cloud-init official site</a> and 
   <a href="https://cloudinit.readthedocs.io/en/latest/reference/examples.html">cloud config examples</a>.</p>
-<h2 id="minimal-cloud-init-config">
-  Minimal cloud-init config
-  <a class="anchor" href="#minimal-cloud-init-config">#</a>
+<h2 id="secured-cloud-init-config">
+  Secured cloud-init config
+  <a class="anchor" href="#secured-cloud-init-config">#</a>
 </h2>
-<p>This minimal config files sets up a user, gives it <code>sudo</code> privileges, sets up fail2ban and prevent SSH for root and without a SSH key.</p>
-<p>Replace the content of the highlighted lines as specified. Note : to install mkpasswd for Debian, you have to install the whois package.</p>
+<p>This minimal config files sets up a user, gives it <code>sudo</code> privileges, sets up fail2ban and improves the security of ssh (no root login, no password login).</p>
+<p>Edit or uncomment of the highlighted lines as specified.</p>
+<p>Note : to install mkpasswd for Debian, you have to install the whois package with <code>sudo apt install whois</code>.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#080;font-style:italic">#cloud-config</span><span style="color:#bbb">
 </span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb"></span><span style="color:#008000;font-weight:bold">timezone</span>:<span style="color:#bbb"> </span>YOUR_TIMEZONE eg. Europe/London <span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#008000;font-weight:bold">users</span>:<span style="color:#bbb">
@@ -264,7 +289,8 @@ https://github.com/alex-shpak/hugo-book
 </span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">passwd</span>:<span style="color:#bbb"> </span>OUTPUT_FROM mkpasswd -m sha-512<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">ssh_authorized_keys</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">      </span>- YOUR_PUBLIC_KEY<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">groups</span>:<span style="color:#bbb"> </span>sudo<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">groups</span>:<span style="color:#bbb"> </span>sudo <span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-style:italic"># If you want to remove the need for a password for sudo, add the wheel group as such : groups: sudo, wheel</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">shell</span>:<span style="color:#bbb"> </span>/bin/bash<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">lock_passwd</span>:<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">false</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#008000;font-weight:bold">packages</span>:<span style="color:#bbb">
@@ -295,10 +321,12 @@ https://github.com/alex-shpak/hugo-book
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic"># Uncomment to only allow SSH for one or several users (space-separated)</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic"># For Bob and Alice the line would be - sed -i &#39;$a AllowUsers Bob Alice&#39; /etc/ssh/sshd_config </span><span style="color:#bbb">
 </span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic">#  - sed -i &#39;$a AllowUsers USERNAME(S)&#39; /etc/ssh/sshd_config </span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic"># Uncomment to remove the need for a password to enter sudo commands for the wheel group </span><span style="color:#bbb">
+</span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic">#  - sed -i -e &#39;$a%wheel ALL=(ALL) NOPASSWD: ALL&#39; /etc/sudoers</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span>- reboot<span style="color:#bbb">
-</span></span></span></code></pre></div><h2 id="minimal-cloud-init-config-with-docker">
-  Minimal cloud-init config with docker
-  <a class="anchor" href="#minimal-cloud-init-config-with-docker">#</a>
+</span></span></span></code></pre></div><h2 id="secured-cloud-init-config-with-docker">
+  Secured cloud-init config with docker
+  <a class="anchor" href="#secured-cloud-init-config-with-docker">#</a>
 </h2>
 <p>Basically the same as the minimal script, but a few lines are added in the <code>runcmd</code> section to add the docker repository and install docker.</p>
 <p>Replace the content of the highlighted lines as specified.</p>
@@ -388,11 +416,10 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#cloud-init">cloud-init</a>
       <ul>
-        <li><a href="#scope">Scope</a></li>
-        <li><a href="#minimal-cloud-init-config">Minimal cloud-init config</a></li>
-        <li><a href="#minimal-cloud-init-config-with-docker">Minimal cloud-init config with docker</a></li>
+        <li><a href="#secured-cloud-init-config">Secured cloud-init config</a></li>
+        <li><a href="#secured-cloud-init-config-with-docker">Secured cloud-init config with docker</a></li>
       </ul>
     </li>
   </ul>
