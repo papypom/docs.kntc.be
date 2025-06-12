@@ -25,12 +25,12 @@ Create the following `compose.yml` file. In your registar, create an A record th
 services:
   portainer:
     image: portainer/portainer-ce:sts
+    restart: unless-stopped
     ports:
       - 9443:9443
     volumes:
       - portainer_data:/data
       - /var/run/docker.sock:/var/run/docker.sock
-    restart: unless-stopped
     ## The following lines are needed for caddy-docker-proxy.
     networks:
       - caddy
@@ -42,7 +42,7 @@ services:
       caddy.forward_auth.copy_headers: "Remote-User Remote-Groups Remote-Name Remote-Email"
       # This next line indicates where to reach Authelia. If you want to limit to a subpath you can modify it as such : caddy.forward_auth: "\subpath app:9091"
       # If accessing Authelia from another server. put the URL (with the https://) of Authelia instead of app:9091 in the following line.
-      caddy.forward_auth: app:9091 
+      caddy.forward_auth: authelia:9091 
       # Uncomment the next if accessing Authelia from another server. header_up is required here as we have Caddy in front of Authelia remotely and we need to let that Caddy know we want to talk to Authelia and not some other site.
       # caddy.foward_auth.header_up: "Host {upstream_hostport}" 
     
@@ -161,12 +161,12 @@ sudo chmod -R 600 /opt/authelia
 
 ### Docker-compose for Authelia
 
-Caddy should be already up and running, go to your registar, set the A record for Authelia and create the following compose file. Two values should be edited, the domain on line 25, and the REDIS_PASSWORD on line 42
+Caddy should be already up and running, go to your registar, set the A record for Authelia and create the following compose file. Two values should be edited, the domain on line 25, and the REDIS_PASSWORD on line 43
 
-```yml {hl_lines=[25,42] style=emacs}
+```yml {hl_lines=[25,43] style=emacs}
 name: "authelia"
 services:
-  app:
+  authelia:
     image: authelia/authelia:latest
     restart: unless-stopped
     depends_on:
@@ -205,6 +205,7 @@ services:
 
   redis:
     image: redis:7
+    restart: unless-stopped
     command: "redis-server --save 60 1 --loglevel warning --requirepass EDIT_WITH_THE_REDIS_PASSWORD_CONTENT"
     volumes:
       - redis:/data

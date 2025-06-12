@@ -10,11 +10,13 @@
   </url><url>
     <loc>http://localhost:1313/docs/docker/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/hugo-cheat-sheet/</loc>
+    <loc>http://localhost:1313/docs/hugo/</loc>
   </url><url>
     <loc>http://localhost:1313/docs/links/</loc>
   </url><url>
-    <loc>http://localhost:1313/docs/hacks/</loc>
+    <loc>http://localhost:1313/docs/nextcloud/</loc>
+  </url><url>
+    <loc>http://localhost:1313/docs/tips/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
   </url><url>

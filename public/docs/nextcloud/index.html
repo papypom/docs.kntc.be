@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Nextcloud Backend
+  #
+
+Using our standardized 
+  Debian server and 
+  Docker stack (Docker, Caddy, Portainer, Authelia), we will publish the needed containers for a Nextcloud backend, this includes Collabora for document editing, the high-performance backend for Talk and the Whiteboard.
+
+  Collabora
+  #
+
+Setting up Collabora is really simple, simple cut and paste this compose file in your Portainer, modify the two highlighted lines, the first one is to set the domain that is allowed to reach your Collabora, the other one the domain from which your Collabora will be reachable (don&rsquo;t forget to create the needed A record).">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/nextcloud/">
+  <meta property="og:site_name" content="KNTC Docs">
+  <meta property="og:title" content="NextCloud ">
+  <meta property="og:description" content="Nextcloud Backend # Using our standardized Debian server and Docker stack (Docker, Caddy, Portainer, Authelia), we will publish the needed containers for a Nextcloud backend, this includes Collabora for document editing, the high-performance backend for Talk and the Whiteboard.
+Collabora # Setting up Collabora is really simple, simple cut and paste this compose file in your Portainer, modify the two highlighted lines, the first one is to set the domain that is allowed to reach your Collabora, the other one the domain from which your Collabora will be reachable (don’t forget to create the needed A record).">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="website">
+<title>NextCloud  | KNTC Docs</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/nextcloud/">
+<link rel="stylesheet" href="/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.e21e37576fd81518291d1f9f0920ab2df267caf0d37b103ce8d5e521f7ddb8cc.js" integrity="sha256-4h43V2/YFRgpHR&#43;fCSCrLfJnyvDTexA86NXlIffduMw=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/docs/nextcloud/index.xml" title="KNTC Docs" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>KNTC Docs</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/cloud-init/" class="">cloud-init</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/" class="">Docker Server</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/configuration.yml/" class="">configuration.yml</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/docker/configuration-oidc.yml/" class="">configuration.yml (with OIDC)</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/hugo/" class="">Hugo cheat sheet</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/links/" class="">Links</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/nextcloud/" class="active">NextCloud </a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/tips/" class="">Tips</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>NextCloud </h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#nextcloud-backend">Nextcloud Backend</a>
+      <ul>
+        <li><a href="#collabora">Collabora</a></li>
+        <li><a href="#high-performance-backend">High-performance Backend</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h1 id="nextcloud-backend">
+  Nextcloud Backend
+  <a class="anchor" href="#nextcloud-backend">#</a>
+</h1>
+<p>Using our standardized 
+  <a href="/docs/cloud-init/">Debian server</a> and 
+  <a href="/docs/docker/">Docker stack</a> (Docker, Caddy, Portainer, Authelia), we will publish the needed containers for a Nextcloud backend, this includes Collabora for document editing, the high-performance backend for Talk and the Whiteboard.</p>
+<h2 id="collabora">
+  Collabora
+  <a class="anchor" href="#collabora">#</a>
+</h2>
+<p>Setting up Collabora is really simple, simple cut and paste this compose file in your Portainer, modify the two highlighted lines, the first one is to set the domain that is allowed to reach your Collabora, the other one the domain from which your Collabora will be reachable (don&rsquo;t forget to create the needed A record).</p>
+<p>If you need more than one domain, simply add aliasgroup2, aliasgroup3, &hellip;</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">services</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">collabora</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">image</span>:<span style="color:#bbb"> </span>collabora/code<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">restart</span>:<span style="color:#bbb"> </span>unless-stopped<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">environment</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">      </span>- aliasgroup1=https://&lt;domain1&gt;:443<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- dictionaries=en_US fr_FR nl de_DE<span style="color:#bbb"> </span><span style="color:#080;font-style:italic">#Add whatever suits your needs</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- TZ=Europe/Berlin<span style="color:#bbb"> </span><span style="color:#080;font-style:italic">#Change if needed</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- extra_params=<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">       </span>--o:ssl.enable=false<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">       </span>--o:ssl.termination=true<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">       </span>--o:logging.level=warning<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">       </span>--o:logging.disable_server_audit=true<span style="color:#bbb">
+</span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">volumes</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- /usr/share/fonts/truetype/:/opt/collaboraoffice/share/fonts/truetype/local/:ro<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">cap_add</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">     </span>- MKNOD<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">networks</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- caddy<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">labels</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy</span>:<span style="color:#bbb"> </span>collabora.example.com<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy.reverse_proxy</span>:<span style="color:#bbb"> </span><span style="color:#b44">&#34;{{upstreams 9980}}&#34;</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#008000;font-weight:bold">networks</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">caddy</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">external</span>:<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">true</span><span style="color:#bbb">
+</span></span></span></code></pre></div><p>If you need additional fonts (a quick Github search should provide the needed files), paste them in the <code>/usr/share/fonts/truetype/</code> folder of your server. Don&rsquo;t forget to <code>chown root:root</code> them.</p>
+<p>Then go to your Nextcloud Administration, go to Office, and set the domain of the freshly created Collabora and add the IP of your server in the WOPI list.</p>
+<h2 id="high-performance-backend">
+  High-performance Backend
+  <a class="anchor" href="#high-performance-backend">#</a>
+</h2>
+<p>I&rsquo;ve tried to install Janus, Turn, Co-Turn, to set everything right, the works. The easiest way by far is to use the HPB image which has all the needed components in one. So, once again, copy-paste the following compose file.</p>
+<p>TBD.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#nextcloud-backend">Nextcloud Backend</a>
+      <ul>
+        <li><a href="#collabora">Collabora</a></li>
+        <li><a href="#high-performance-backend">High-performance Backend</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

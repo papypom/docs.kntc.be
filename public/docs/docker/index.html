@@ -37,7 +37,7 @@ Create the following compose.yml file. In your registar, create an A record that
 <link rel="canonical" href="http://localhost:1313/docs/docker/">
 <link rel="stylesheet" href="/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.be04cd7c5b0d09ee1b49869439d1271ae23618ef6f3b164f433658bca9a3de54.js" integrity="sha256-vgTNfFsNCe4bSYaUOdEnGuI2GO9vOxZPQzZYvKmj3lQ=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.e21e37576fd81518291d1f9f0920ab2df267caf0d37b103ce8d5e521f7ddb8cc.js" integrity="sha256-4h43V2/YFRgpHR&#43;fCSCrLfJnyvDTexA86NXlIffduMw=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <link rel="alternate" type="application/rss+xml" href="http://localhost:1313/docs/docker/index.xml" title="KNTC Docs" />
@@ -190,6 +190,24 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <a href="/docs/nextcloud/" class="">NextCloud </a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/docs/tips/" class="">Tips</a>
   
 
@@ -297,12 +315,12 @@ https://github.com/alex-shpak/hugo-book
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">services</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">portainer</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">image</span>:<span style="color:#bbb"> </span>portainer/portainer-ce:sts<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">restart</span>:<span style="color:#bbb"> </span>unless-stopped<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">ports</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- <span style="color:#666">9443</span>:<span style="color:#666">9443</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">volumes</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- portainer_data:/data<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- /var/run/docker.sock:/var/run/docker.sock<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">restart</span>:<span style="color:#bbb"> </span>unless-stopped<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#080;font-style:italic">## The following lines are needed for caddy-docker-proxy.</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">networks</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- caddy<span style="color:#bbb">
@@ -314,7 +332,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy.forward_auth.copy_headers</span>:<span style="color:#bbb"> </span><span style="color:#b44">&#34;Remote-User Remote-Groups Remote-Name Remote-Email&#34;</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#080;font-style:italic"># This next line indicates where to reach Authelia. If you want to limit to a subpath you can modify it as such : caddy.forward_auth: &#34;\subpath app:9091&#34;</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#080;font-style:italic"># If accessing Authelia from another server. put the URL (with the https://) of Authelia instead of app:9091 in the following line.</span><span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy.forward_auth</span>:<span style="color:#bbb"> </span>app:9091 <span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#008000;font-weight:bold">caddy.forward_auth</span>:<span style="color:#bbb"> </span>authelia:9091 <span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#080;font-style:italic"># Uncomment the next if accessing Authelia from another server. header_up is required here as we have Caddy in front of Authelia remotely and we need to let that Caddy know we want to talk to Authelia and not some other site.</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span><span style="color:#080;font-style:italic"># caddy.foward_auth.header_up: &#34;Host {upstream_hostport}&#34; </span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    
@@ -407,10 +425,10 @@ sudo chmod -R 600 /opt/authelia
   Docker-compose for Authelia
   <a class="anchor" href="#docker-compose-for-authelia">#</a>
 </h3>
-<p>Caddy should be already up and running, go to your registar, set the A record for Authelia and create the following compose file. Two values should be edited, the domain on line 25, and the REDIS_PASSWORD on line 42</p>
+<p>Caddy should be already up and running, go to your registar, set the A record for Authelia and create the following compose file. Two values should be edited, the domain on line 25, and the REDIS_PASSWORD on line 43</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;display:grid;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#008000;font-weight:bold">name</span>:<span style="color:#bbb"> </span><span style="color:#b44">&#34;authelia&#34;</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#008000;font-weight:bold">services</span>:<span style="color:#bbb">
-</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">app</span>:<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">authelia</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">image</span>:<span style="color:#bbb"> </span>authelia/authelia:latest<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">restart</span>:<span style="color:#bbb"> </span>unless-stopped<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">depends_on</span>:<span style="color:#bbb">
@@ -449,6 +467,7 @@ sudo chmod -R 600 /opt/authelia
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">  </span><span style="color:#008000;font-weight:bold">redis</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">image</span>:<span style="color:#bbb"> </span>redis:7<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">restart</span>:<span style="color:#bbb"> </span>unless-stopped<span style="color:#bbb">
 </span></span></span><span style="display:flex; background-color:#dfdfdf"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">command</span>:<span style="color:#bbb"> </span><span style="color:#b44">&#34;redis-server --save 60 1 --loglevel warning --requirepass EDIT_WITH_THE_REDIS_PASSWORD_CONTENT&#34;</span><span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">    </span><span style="color:#008000;font-weight:bold">volumes</span>:<span style="color:#bbb">
 </span></span></span><span style="display:flex;"><span><span style="color:#bbb">      </span>- redis:/data<span style="color:#bbb">
